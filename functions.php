@@ -24,6 +24,14 @@ function mavi_enqueue_styles() {
 		wp_get_theme()->get( 'Version' )
 	);
 
+	// Splide.js — Carrousel (CSS)
+	wp_enqueue_style(
+		'splide-css',
+		'https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide-core.min.css',
+		array(),
+		'4.1.4'
+	);
+
 	// Styles custom additionnels
 	if ( file_exists( get_template_directory() . '/assets/css/custom.css' ) ) {
 		wp_enqueue_style(
@@ -40,12 +48,21 @@ add_action( 'wp_enqueue_scripts', 'mavi_enqueue_styles' );
  * Enqueue les scripts du thème.
  */
 function mavi_enqueue_scripts() {
+	// Splide.js — Carrousel (JS)
+	wp_enqueue_script(
+		'splide-js',
+		'https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/js/splide.min.js',
+		array(),
+		'4.1.4',
+		true
+	);
+
 	// Script principal
 	if ( file_exists( get_template_directory() . '/assets/js/main.js' ) ) {
 		wp_enqueue_script(
 			'mavi-main',
 			get_template_directory_uri() . '/assets/js/main.js',
-			array(),
+			array( 'splide-js' ),
 			wp_get_theme()->get( 'Version' ),
 			true
 		);
