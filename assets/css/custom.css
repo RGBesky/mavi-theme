@@ -1064,11 +1064,11 @@ h1, h2, h3, h4, h5, h6 {
 		height: 40px !important;
 	}
 
-	/* Titre tronqué si trop long sur petit écran */
+	/* Titre sur plusieurs lignes */
 	.mavi-header__title {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		overflow: visible;
+		white-space: normal;
+		line-height: 1.2;
 	}
 
 	/* Hamburger : toujours à droite, bien aligné */
