@@ -395,12 +395,27 @@
 	"templateParts": [
 		{
 			"name": "header",
-			"title": "Header",
+			"title": "En-tête — Logo + Navigation",
+			"area": "header"
+		},
+		{
+			"name": "header-centered",
+			"title": "En-tête — Centré",
+			"area": "header"
+		},
+		{
+			"name": "header-minimal",
+			"title": "En-tête — Minimal (titre seul)",
 			"area": "header"
 		},
 		{
 			"name": "footer",
-			"title": "Footer",
+			"title": "Pied de page — Complet",
+			"area": "footer"
+		},
+		{
+			"name": "footer-minimal",
+			"title": "Pied de page — Minimal",
 			"area": "footer"
 		}
 	],

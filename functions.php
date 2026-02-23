@@ -83,6 +83,7 @@ add_action( 'wp_enqueue_scripts', 'mavi_enqueue_scripts' );
  */
 function mavi_editor_styles() {
 	add_editor_style( 'style.css' );
+	add_editor_style( 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap' );
 
 	if ( file_exists( get_template_directory() . '/assets/css/custom.css' ) ) {
 		add_editor_style( 'assets/css/custom.css' );

@@ -1,31 +1,28 @@
-<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(2rem, 5vw, 3rem)","bottom":"clamp(2rem, 5vw, 3rem)"}},"color":{"background":"var:preset|color|primary"}},"className":"mavi-footer"} -->
-<div class="wp-block-group mavi-footer" style="background-color: var(--wp--preset--color--primary); padding-top: clamp(2rem, 5vw, 3rem); padding-bottom: clamp(2rem, 5vw, 3rem);">
+<!-- wp:group {"layout":{"type":"constrained"},"backgroundColor":"primary","className":"mavi-footer"} -->
+<div class="wp-block-group mavi-footer has-primary-background-color has-background">
 
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group">
+<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+<div class="wp-block-group">
 
-		<!-- wp:group {"layout":{"type":"constrained"},"className":"mavi-footer__info"} -->
-		<div class="wp-block-group mavi-footer__info">
+<!-- wp:group {"layout":{"type":"constrained"},"className":"mavi-footer__info"} -->
+<div class="wp-block-group mavi-footer__info">
+<!-- wp:site-title {"level":3,"className":"mavi-footer__title","fontFamily":"heading-serif","style":{"elements":{"link":{"color":{"text":"#ffffff"}}},"color":{"text":"#ffffff"}}} /-->
+<!-- wp:paragraph {"style":{"color":{"text":"#ffffffaa"}},"fontSize":"small"} -->
+<p class="has-text-color has-small-font-size" style="color:#ffffffaa">© 2026 Les ateliers IIACA — Fait avec WordPress</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
 
-			<!-- wp:site-title {"level":3,"style":{"typography":{"fontSize":"var:preset|font-size|large","fontWeight":"700","fontFamily":"var:preset|font-family|heading-serif"},"color":{"text":"#FFFFFF"}},"className":"mavi-footer__title"} /-->
+<!-- wp:social-links {"iconColor":"white","iconColorValue":"#ffffff","size":"has-normal-icon-size","className":"mavi-footer__social","layout":{"type":"flex"}} -->
+<ul class="wp-block-social-links has-normal-icon-size has-icon-color mavi-footer__social">
+<!-- wp:social-link {"url":"https://github.com/besky","service":"github"} /-->
+<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
+<!-- wp:social-link {"url":"#","service":"mail"} /-->
+</ul>
+<!-- /wp:social-links -->
 
-			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"#ffffffaa"}}} -->
-			<p style="color: #ffffffaa; font-size: var(--wp--preset--font-size--small);">© 2026 Les ateliers IIACA — Fait avec WordPress</p>
-			<!-- /wp:paragraph -->
-
-		</div>
-		<!-- /wp:group -->
-
-		<!-- wp:social-links {"iconColor":"white","iconColorValue":"#FFFFFF","size":"has-normal-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|30"}}},"layout":{"type":"flex"},"className":"mavi-footer__social"} -->
-		<ul class="wp-block-social-links has-normal-icon-size has-icon-color mavi-footer__social">
-			<!-- wp:social-link {"url":"https://github.com/besky","service":"github"} /-->
-			<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
-			<!-- wp:social-link {"url":"#","service":"mail"} /-->
-		</ul>
-		<!-- /wp:social-links -->
-
-	</div>
-	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
 
 </div>
 <!-- /wp:group -->

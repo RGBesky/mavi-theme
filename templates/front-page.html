@@ -1,160 +1,146 @@
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
-<!-- wp:group {"align":"full","tagName":"main","layout":{"type":"default"},"className":"mavi-front-page"} -->
+<!-- wp:group {"tagName":"main","align":"full","layout":{"type":"default"},"className":"mavi-front-page"} -->
 <main class="wp-block-group alignfull mavi-front-page">
 
-	<!-- wp:group {"align":"full","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(4rem, 10vw, 7rem)","bottom":"clamp(3rem, 8vw, 5rem)","left":"clamp(1rem, 4vw, 2rem)","right":"clamp(1rem, 4vw, 2rem)"}},"color":{"background":"var:preset|color|primary"}},"className":"mavi-hero"} -->
-	<div class="wp-block-group alignfull mavi-hero" style="background-color: var(--wp--preset--color--primary); padding-top: clamp(4rem, 10vw, 7rem); padding-right: clamp(1rem, 4vw, 2rem); padding-bottom: clamp(3rem, 8vw, 5rem); padding-left: clamp(1rem, 4vw, 2rem);">
+<!-- wp:group {"backgroundColor":"primary","className":"mavi-hero","layout":{"type":"constrained","contentSize":"640px"}} -->
+<div class="wp-block-group mavi-hero has-primary-background-color has-background">
 
-		<!-- wp:group {"layout":{"type":"constrained","contentSize":"640px"},"style":{"spacing":{"blockGap":"clamp(1rem, 3vw, 1.5rem)"}}} -->
-		<div class="wp-block-group">
+<!-- wp:paragraph {"align":"center","style":{"typography":{"letterSpacing":"0.15em","textTransform":"uppercase","fontStyle":"normal","fontWeight":"600"}},"textColor":"accent-light","fontSize":"small"} -->
+<p class="has-text-align-center has-accent-light-color has-text-color has-small-font-size" style="font-style:normal;font-weight:600;letter-spacing:0.15em;text-transform:uppercase">Les ateliers IIACA</p>
+<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"clamp(0.8125rem, 0.78rem + 0.16vw, 0.875rem)","letterSpacing":"0.15em","textTransform":"uppercase","fontWeight":"600"},"color":{"text":"var:preset|color|accent-light"}}} -->
-			<p class="has-text-align-center" style="color: var(--wp--preset--color--accent-light); font-size: clamp(0.8125rem, 0.78rem + 0.16vw, 0.875rem); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;">Les ateliers IIACA</p>
-			<!-- /wp:paragraph -->
+<!-- wp:heading {"textAlign":"center","level":1,"style":{"color":{"text":"#ffffff"}},"className":"mavi-hero__title"} -->
+<h1 class="wp-block-heading has-text-align-center mavi-hero__title has-text-color" style="color:#ffffff">Développeur, Créateur &amp; Maker</h1>
+<!-- /wp:heading -->
 
-			<!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(2rem, 1.5rem + 2.5vw, 3.25rem)","fontWeight":"700","lineHeight":"1.15"},"color":{"text":"#FFFFFF"}},"className":"mavi-hero__title"} -->
-			<h1 class="wp-block-heading has-text-align-center mavi-hero__title" style="color: #FFFFFF; font-size: clamp(2rem, 1.5rem + 2.5vw, 3.25rem); font-weight: 700; line-height: 1.15;">Développeur, Créateur &amp; Maker</h1>
-			<!-- /wp:heading -->
+<!-- wp:paragraph {"align":"center","style":{"color":{"text":"#ffffffcc"}},"className":"mavi-hero__subtitle"} -->
+<p class="has-text-align-center mavi-hero__subtitle has-text-color" style="color:#ffffffcc">Je construis des applications, je partage mes apprentissages et je documente mon parcours.</p>
+<!-- /wp:paragraph -->
 
-			<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"clamp(1rem, 0.9rem + 0.5vw, 1.25rem)","lineHeight":"1.7"},"color":{"text":"#ffffffcc"}}} -->
-			<p class="has-text-align-center" style="color: #ffffffcc; font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); line-height: 1.7;">Je construis des applications, je partage mes apprentissages et je documente mon parcours.</p>
-			<!-- /wp:paragraph -->
+<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons">
+<!-- wp:button {"backgroundColor":"accent","textColor":"white","className":"mavi-btn-primary"} -->
+<div class="wp-block-button mavi-btn-primary"><a class="wp-block-button__link has-white-color has-accent-background-color has-text-color has-background wp-element-button">Voir le portfolio</a></div>
+<!-- /wp:button -->
 
-			<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"clamp(1.5rem, 3vw, 2rem)"}}}} -->
-			<div class="wp-block-buttons" style="margin-top: clamp(1.5rem, 3vw, 2rem);">
-				<!-- wp:button {"backgroundColor":"accent","textColor":"white","style":{"border":{"radius":"6px"},"spacing":{"padding":{"top":"0.75rem","bottom":"0.75rem","left":"2rem","right":"2rem"}},"typography":{"fontSize":"var:preset|font-size|medium","fontWeight":"600"}},"className":"mavi-btn-primary"} -->
-				<div class="wp-block-button mavi-btn-primary" style="font-size: var(--wp--preset--font-size--medium); font-weight: 600;"><a class="wp-block-button__link has-accent-background-color has-white-color has-text-color has-background wp-element-button" style="border-radius: 6px; padding-top: 0.75rem; padding-right: 2rem; padding-bottom: 0.75rem; padding-left: 2rem;">Voir le portfolio</a></div>
-				<!-- /wp:button -->
+<!-- wp:button {"textColor":"white","className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-white-color has-text-color wp-element-button">Mon parcours</a></div>
+<!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
 
-				<!-- wp:button {"textColor":"white","className":"is-style-outline mavi-btn-outline","style":{"border":{"radius":"6px","color":"#ffffff55","width":"1.5px"},"spacing":{"padding":{"top":"0.75rem","bottom":"0.75rem","left":"2rem","right":"2rem"}},"typography":{"fontSize":"var:preset|font-size|medium","fontWeight":"500"}}} -->
-				<div class="wp-block-button is-style-outline mavi-btn-outline" style="font-size: var(--wp--preset--font-size--medium); font-weight: 500;"><a class="wp-block-button__link has-white-color has-text-color wp-element-button" style="border-radius: 6px; border-color: #ffffff55; border-width: 1.5px; padding-top: 0.75rem; padding-right: 2rem; padding-bottom: 0.75rem; padding-left: 2rem;">Mon parcours</a></div>
-				<!-- /wp:button -->
-			</div>
-			<!-- /wp:buttons -->
+</div>
+<!-- /wp:group -->
 
-		</div>
-		<!-- /wp:group -->
+<!-- wp:group {"backgroundColor":"background","className":"mavi-section-about","layout":{"type":"constrained"}} -->
+<div class="wp-block-group mavi-section-about has-background-background-color has-background">
 
-	</div>
-	<!-- /wp:group -->
+<!-- wp:columns -->
+<div class="wp-block-columns">
 
-	<!-- wp:group {"align":"full","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(3rem, 6vw, 5rem)","bottom":"clamp(3rem, 6vw, 5rem)","left":"clamp(1rem, 4vw, 2rem)","right":"clamp(1rem, 4vw, 2rem)"}},"color":{"background":"var:preset|color|background"}},"className":"mavi-section-about"} -->
-	<div class="wp-block-group alignfull mavi-section-about" style="background-color: var(--wp--preset--color--background); padding-top: clamp(3rem, 6vw, 5rem); padding-right: clamp(1rem, 4vw, 2rem); padding-bottom: clamp(3rem, 6vw, 5rem); padding-left: clamp(1rem, 4vw, 2rem);">
+<!-- wp:column {"width":"40%"} -->
+<div class="wp-block-column" style="flex-basis:40%">
 
-		<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"clamp(2rem, 5vw, 4rem)"}}}} -->
-		<div class="wp-block-columns">
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">À propos</h2>
+<!-- /wp:heading -->
 
-			<!-- wp:column {"width":"40%","style":{"spacing":{"blockGap":"1rem"}}} -->
-			<div class="wp-block-column" style="flex-basis: 40%;">
+<!-- wp:paragraph {"textColor":"secondary"} -->
+<p class="has-secondary-color has-text-color">Passionné par la tech et le développement, je crée des outils et des applications. Ce site est mon espace pour partager mon travail et mes réflexions.</p>
+<!-- /wp:paragraph -->
 
-				<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"clamp(1.5rem, 1.25rem + 1.25vw, 2rem)"}}} -->
-				<h2 class="wp-block-heading" style="font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);">À propos</h2>
-				<!-- /wp:heading -->
+</div>
+<!-- /wp:column -->
 
-				<!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|secondary"},"typography":{"lineHeight":"1.75"}}} -->
-				<p style="color: var(--wp--preset--color--secondary); line-height: 1.75;">Passionné par la tech et le développement, je crée des outils et des applications. Ce site est mon espace pour partager mon travail et mes réflexions.</p>
-				<!-- /wp:paragraph -->
+<!-- wp:column {"width":"60%"} -->
+<div class="wp-block-column" style="flex-basis:60%">
 
-			</div>
-			<!-- /wp:column -->
+<!-- wp:columns -->
+<div class="wp-block-columns">
 
-			<!-- wp:column {"width":"60%"} -->
-			<div class="wp-block-column" style="flex-basis: 60%;">
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:group {"backgroundColor":"white","className":"mavi-card mavi-stat-card","style":{"border":{"radius":"8px"},"spacing":{"padding":{"top":"1.5rem","bottom":"1.5rem","left":"1.5rem","right":"1.5rem"}}}} -->
+<div class="wp-block-group mavi-card mavi-stat-card has-white-background-color has-background" style="border-radius:8px;padding-top:1.5rem;padding-right:1.5rem;padding-bottom:1.5rem;padding-left:1.5rem">
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"2rem","fontWeight":"700","lineHeight":"1"}},"textColor":"accent"} -->
+<p class="has-accent-color has-text-color" style="font-size:2rem;font-weight:700;line-height:1">5+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
+<p class="has-secondary-color has-text-color has-small-font-size">Projets publiés</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:column -->
 
-				<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"1rem","top":"1rem"}}}} -->
-				<div class="wp-block-columns">
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:group {"backgroundColor":"white","className":"mavi-card mavi-stat-card","style":{"border":{"radius":"8px"},"spacing":{"padding":{"top":"1.5rem","bottom":"1.5rem","left":"1.5rem","right":"1.5rem"}}}} -->
+<div class="wp-block-group mavi-card mavi-stat-card has-white-background-color has-background" style="border-radius:8px;padding-top:1.5rem;padding-right:1.5rem;padding-bottom:1.5rem;padding-left:1.5rem">
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"2rem","fontWeight":"700","lineHeight":"1"}},"textColor":"accent"} -->
+<p class="has-accent-color has-text-color" style="font-size:2rem;font-weight:700;line-height:1">3</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
+<p class="has-secondary-color has-text-color has-small-font-size">Technos maîtrisées</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:column -->
 
-					<!-- wp:column {"className":"mavi-stat-card"} -->
-					<div class="wp-block-column mavi-stat-card">
-						<!-- wp:group {"style":{"color":{"background":"var:preset|color|white"},"spacing":{"padding":{"top":"1.5rem","bottom":"1.5rem","left":"1.5rem","right":"1.5rem"}},"border":{"radius":"8px"}},"className":"mavi-card"} -->
-						<div class="wp-block-group mavi-card" style="border-radius: 8px; background-color: var(--wp--preset--color--white); padding: 1.5rem;">
-							<!-- wp:paragraph {"style":{"typography":{"fontSize":"2rem","fontWeight":"700","lineHeight":"1"},"color":{"text":"var:preset|color|accent"}}} -->
-							<p style="color: var(--wp--preset--color--accent); font-size: 2rem; font-weight: 700; line-height: 1;">5+</p>
-							<!-- /wp:paragraph -->
-							<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"var:preset|color|secondary"}}} -->
-							<p style="color: var(--wp--preset--color--secondary); font-size: var(--wp--preset--font-size--small);">Projets publiés</p>
-							<!-- /wp:paragraph -->
-						</div>
-						<!-- /wp:group -->
-					</div>
-					<!-- /wp:column -->
+<!-- wp:column -->
+<div class="wp-block-column">
+<!-- wp:group {"backgroundColor":"white","className":"mavi-card mavi-stat-card","style":{"border":{"radius":"8px"},"spacing":{"padding":{"top":"1.5rem","bottom":"1.5rem","left":"1.5rem","right":"1.5rem"}}}} -->
+<div class="wp-block-group mavi-card mavi-stat-card has-white-background-color has-background" style="border-radius:8px;padding-top:1.5rem;padding-right:1.5rem;padding-bottom:1.5rem;padding-left:1.5rem">
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"2rem","fontWeight":"700","lineHeight":"1"}},"textColor":"accent"} -->
+<p class="has-accent-color has-text-color" style="font-size:2rem;font-weight:700;line-height:1">∞</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"textColor":"secondary","fontSize":"small"} -->
+<p class="has-secondary-color has-text-color has-small-font-size">Curiosité</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:column -->
 
-					<!-- wp:column {"className":"mavi-stat-card"} -->
-					<div class="wp-block-column mavi-stat-card">
-						<!-- wp:group {"style":{"color":{"background":"var:preset|color|white"},"spacing":{"padding":{"top":"1.5rem","bottom":"1.5rem","left":"1.5rem","right":"1.5rem"}},"border":{"radius":"8px"}},"className":"mavi-card"} -->
-						<div class="wp-block-group mavi-card" style="border-radius: 8px; background-color: var(--wp--preset--color--white); padding: 1.5rem;">
-							<!-- wp:paragraph {"style":{"typography":{"fontSize":"2rem","fontWeight":"700","lineHeight":"1"},"color":{"text":"var:preset|color|accent"}}} -->
-							<p style="color: var(--wp--preset--color--accent); font-size: 2rem; font-weight: 700; line-height: 1;">3</p>
-							<!-- /wp:paragraph -->
-							<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"var:preset|color|secondary"}}} -->
-							<p style="color: var(--wp--preset--color--secondary); font-size: var(--wp--preset--font-size--small);">Technologies maîtrisées</p>
-							<!-- /wp:paragraph -->
-						</div>
-						<!-- /wp:group -->
-					</div>
-					<!-- /wp:column -->
+</div>
+<!-- /wp:columns -->
 
-					<!-- wp:column {"className":"mavi-stat-card"} -->
-					<div class="wp-block-column mavi-stat-card">
-						<!-- wp:group {"style":{"color":{"background":"var:preset|color|white"},"spacing":{"padding":{"top":"1.5rem","bottom":"1.5rem","left":"1.5rem","right":"1.5rem"}},"border":{"radius":"8px"}},"className":"mavi-card"} -->
-						<div class="wp-block-group mavi-card" style="border-radius: 8px; background-color: var(--wp--preset--color--white); padding: 1.5rem;">
-							<!-- wp:paragraph {"style":{"typography":{"fontSize":"2rem","fontWeight":"700","lineHeight":"1"},"color":{"text":"var:preset|color|accent"}}} -->
-							<p style="color: var(--wp--preset--color--accent); font-size: 2rem; font-weight: 700; line-height: 1;">∞</p>
-							<!-- /wp:paragraph -->
-							<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"var:preset|color|secondary"}}} -->
-							<p style="color: var(--wp--preset--color--secondary); font-size: var(--wp--preset--font-size--small);">Curiosité</p>
-							<!-- /wp:paragraph -->
-						</div>
-						<!-- /wp:group -->
-					</div>
-					<!-- /wp:column -->
+</div>
+<!-- /wp:column -->
 
-				</div>
-				<!-- /wp:columns -->
+</div>
+<!-- /wp:columns -->
 
-			</div>
-			<!-- /wp:column -->
+</div>
+<!-- /wp:group -->
 
-		</div>
-		<!-- /wp:columns -->
+<!-- wp:group {"backgroundColor":"white","className":"mavi-section-latest","layout":{"type":"constrained"}} -->
+<div class="wp-block-group mavi-section-latest has-white-background-color has-background">
 
-	</div>
-	<!-- /wp:group -->
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Derniers articles</h2>
+<!-- /wp:heading -->
 
-	<!-- wp:group {"align":"full","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(3rem, 6vw, 5rem)","bottom":"clamp(3rem, 6vw, 5rem)","left":"clamp(1rem, 4vw, 2rem)","right":"clamp(1rem, 4vw, 2rem)"}},"color":{"background":"var:preset|color|white"}},"className":"mavi-section-latest"} -->
-	<div class="wp-block-group alignfull mavi-section-latest" style="background-color: var(--wp--preset--color--white); padding-top: clamp(3rem, 6vw, 5rem); padding-right: clamp(1rem, 4vw, 2rem); padding-bottom: clamp(3rem, 6vw, 5rem); padding-left: clamp(1rem, 4vw, 2rem);">
+<!-- wp:query {"queryId":1,"query":{"perPage":3,"postType":"post","order":"desc","orderBy":"date"}} -->
+<div class="wp-block-query">
+<!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
 
-		<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"},"style":{"spacing":{"margin":{"bottom":"clamp(1.5rem, 3vw, 2.5rem)"}}}} -->
-		<div class="wp-block-group" style="margin-bottom: clamp(1.5rem, 3vw, 2.5rem);">
-			<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"clamp(1.5rem, 1.25rem + 1.25vw, 2rem)"}}} -->
-			<h2 class="wp-block-heading" style="font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);">Derniers articles</h2>
-			<!-- /wp:heading -->
+<!-- wp:group {"backgroundColor":"background","className":"mavi-card mavi-post-card","style":{"border":{"radius":"8px"},"spacing":{"padding":{"top":"1.25rem","bottom":"1.25rem","left":"1.25rem","right":"1.25rem"}}}} -->
+<div class="wp-block-group mavi-card mavi-post-card has-background-background-color has-background" style="border-radius:8px;padding-top:1.25rem;padding-right:1.25rem;padding-bottom:1.25rem;padding-left:1.25rem">
+<!-- wp:post-date {"textColor":"secondary","fontSize":"small"} /-->
+<!-- wp:post-title {"level":3,"isLink":true,"style":{"typography":{"fontWeight":"600"}},"fontSize":"large"} /-->
+<!-- wp:post-excerpt {"moreText":"Lire →","excerptLength":20,"textColor":"secondary","fontSize":"small"} /-->
+</div>
+<!-- /wp:group -->
 
-			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small"}}} -->
-			<p style="font-size: var(--wp--preset--font-size--small);"><a href="/blog">Voir tous les articles →</a></p>
-			<!-- /wp:paragraph -->
-		</div>
-		<!-- /wp:group -->
+<!-- /wp:post-template -->
+</div>
+<!-- /wp:query -->
 
-		<!-- wp:query {"queryId":10,"query":{"perPage":3,"pages":1,"offset":0,"postType":"post","order":"desc","orderBy":"date"}} -->
-		<div class="wp-block-query">
-			<!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
-
-				<!-- wp:group {"style":{"color":{"background":"var:preset|color|background"},"spacing":{"padding":{"top":"1.25rem","bottom":"1.25rem","left":"1.25rem","right":"1.25rem"}},"border":{"radius":"8px"}},"className":"mavi-card mavi-post-card"} -->
-				<div class="wp-block-group mavi-card mavi-post-card" style="border-radius: 8px; background-color: var(--wp--preset--color--background); padding: 1.25rem;">
-					<!-- wp:post-date {"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"var:preset|color|secondary"}}} /-->
-					<!-- wp:post-title {"level":3,"isLink":true,"style":{"typography":{"fontSize":"var:preset|font-size|large","fontWeight":"600"},"spacing":{"margin":{"top":"0.25rem","bottom":"0.5rem"}}}} /-->
-					<!-- wp:post-excerpt {"moreText":"Lire →","excerptLength":20,"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"var:preset|color|secondary"}}} /-->
-				</div>
-				<!-- /wp:group -->
-
-			<!-- /wp:post-template -->
-		</div>
-		<!-- /wp:query -->
-
-	</div>
-	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
 
 </main>
 <!-- /wp:group -->

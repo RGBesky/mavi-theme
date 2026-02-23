@@ -106,12 +106,27 @@ span a,
    ========================================================================== */
 
 .mavi-header {
-	padding: var(--mavi-content-padding);
+	padding: clamp(0.75rem, 2vw, 1rem) var(--mavi-content-padding);
 	background-color: var(--wp--preset--color--white, #FFFFFF);
 	box-shadow: 0 1px 3px rgba(44, 58, 84, 0.06), 0 1px 2px rgba(44, 58, 84, 0.04);
 	position: sticky;
 	top: 0;
 	z-index: 1000;
+}
+
+/* Variante : en-tête centré */
+.mavi-header--centered {
+	text-align: center;
+}
+
+.mavi-header--centered .mavi-header__brand {
+	justify-content: center !important;
+}
+
+/* Variante : en-tête minimal */
+.mavi-header--minimal {
+	box-shadow: none;
+	border-bottom: 1px solid var(--wp--preset--color--border, #D9CEBD);
 }
 
 .mavi-header .wp-block-group {
@@ -315,11 +330,19 @@ span a,
 
 .mavi-footer {
 	position: relative;
+	padding: clamp(2rem, 5vw, 3rem) var(--mavi-content-padding);
 }
 
 .mavi-footer > .wp-block-group {
 	flex-wrap: wrap !important;
 	gap: var(--mavi-gap);
+}
+
+/* Variante : footer minimal */
+.mavi-footer--minimal {
+	padding: clamp(1rem, 3vw, 1.5rem) var(--mavi-content-padding);
+	text-align: center;
+	border-top: 1px solid var(--wp--preset--color--border, #D9CEBD);
 }
 
 .mavi-footer__title a {
@@ -721,6 +744,23 @@ h1, h2, h3, h4, h5, h6 {
 .mavi-hero {
 	position: relative;
 	overflow: hidden;
+	padding: clamp(4rem, 10vw, 7rem) var(--mavi-content-padding) clamp(3rem, 8vw, 5rem);
+}
+
+.mavi-hero__subtitle {
+	font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+	line-height: 1.7;
+}
+
+.mavi-hero__title {
+	font-size: clamp(2rem, 1.5rem + 2.5vw, 3.25rem) !important;
+	line-height: 1.15;
+}
+
+/* Sections — padding responsive */
+.mavi-section-about,
+.mavi-section-latest {
+	padding: clamp(3rem, 6vw, 5rem) var(--mavi-content-padding);
 }
 
 .mavi-hero::before {
@@ -762,11 +802,13 @@ h1, h2, h3, h4, h5, h6 {
 	box-shadow: 0 4px 16px rgba(193, 89, 59, 0.4);
 }
 
-.mavi-btn-outline .wp-block-button__link {
+/* Outline button on dark backgrounds */
+.mavi-hero .is-style-outline .wp-block-button__link {
+	border: 1.5px solid rgba(255, 255, 255, 0.4);
 	transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
 
-.mavi-btn-outline .wp-block-button__link:hover {
+.mavi-hero .is-style-outline .wp-block-button__link:hover {
 	background-color: rgba(255, 255, 255, 0.1) !important;
 	border-color: #FFFFFF !important;
 	transform: translateY(-1px);
@@ -804,7 +846,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Stat cards — slight accent bar */
-.mavi-stat-card .mavi-card {
+.mavi-stat-card {
 	border-top: 3px solid var(--wp--preset--color--accent, #C1593B);
 }
 
@@ -1071,8 +1113,8 @@ h1, h2, h3, h4, h5, h6 {
 
 	/* Front-page hero : reduce padding */
 	.mavi-hero {
-		padding-top: 3rem !important;
-		padding-bottom: 2.5rem !important;
+		padding-top: 2.5rem !important;
+		padding-bottom: 2rem !important;
 	}
 
 	.mavi-hero::before,
@@ -1081,7 +1123,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	/* Stat cards : stack */
-	.mavi-stat-card .mavi-card {
+	.mavi-stat-card {
 		padding: 1rem !important;
 	}
 
