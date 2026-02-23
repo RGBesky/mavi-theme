@@ -363,6 +363,29 @@ span a,
 	opacity: 0.8;
 }
 
+/* Mail icon — fond terracotta au lieu du gris par défaut */
+.wp-block-social-link.wp-social-link-mail {
+	background-color: var(--wp--preset--color--accent, #C1593B) !important;
+}
+
+/* Social icons — centrage parfait de l'icône dans le cercle */
+.wp-block-social-links .wp-block-social-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wp-block-social-links .wp-block-social-link a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.4em;
+}
+
+.wp-block-social-links .wp-block-social-link a svg {
+	display: block;
+}
+
 /* ==========================================================================
    4. FLUID TYPOGRAPHY
    ========================================================================== */
@@ -583,15 +606,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Flèches de navigation */
 .mavi-carousel .splide__arrow {
-	background: var(--wp--preset--color--background, #FFFFFF);
+	background: var(--wp--preset--color--white, #FFFFFF);
 	box-shadow: 0 2px 8px rgba(44, 58, 84, 0.12);
 	opacity: 0.9;
-	width: 36px;
-	height: 36px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 
 .mavi-carousel .splide__arrow:hover {
 	opacity: 1;
+	box-shadow: 0 4px 12px rgba(44, 58, 84, 0.18);
 }
 
 /* Pagination dots — taille touch-friendly */
@@ -603,6 +628,65 @@ h1, h2, h3, h4, h5, h6 {
 
 .mavi-carousel .splide__pagination__page.is-active {
 	background: var(--wp--preset--color--accent, #C1593B);
+}
+
+/* ==========================================================================
+   10b. CARROUSEL CONTENU (cartes swipables)
+   ========================================================================== */
+
+.mavi-content-carousel {
+	max-width: 100%;
+	overflow: hidden;
+	padding-bottom: 1rem;
+}
+
+/* Chaque carte du carrousel contenu */
+.mavi-content-carousel .splide__slide {
+	padding: 0.5rem;
+}
+
+.mavi-content-carousel .mavi-slide-card {
+	background: var(--wp--preset--color--white, #FFFFFF);
+	border-radius: 12px;
+	padding: clamp(1.25rem, 3vw, 2rem);
+	box-shadow: 0 2px 8px rgba(44, 58, 84, 0.08), 0 1px 3px rgba(44, 58, 84, 0.04);
+	border: 1px solid var(--wp--preset--color--border, #D9CEBD);
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.mavi-content-carousel .mavi-slide-card:hover {
+	box-shadow: 0 6px 20px rgba(44, 58, 84, 0.12), 0 2px 6px rgba(44, 58, 84, 0.06);
+	transform: translateY(-2px);
+}
+
+@media (hover: none) {
+	.mavi-content-carousel .mavi-slide-card:hover {
+		transform: none;
+	}
+}
+
+/* Icône / emoji en haut de la carte */
+.mavi-slide-card__icon {
+	font-size: 2.5rem;
+	line-height: 1;
+	margin-bottom: 0.75rem;
+}
+
+/* Barre d'accent colorée en haut */
+.mavi-content-carousel .mavi-slide-card--accent {
+	border-top: 3px solid var(--wp--preset--color--accent, #C1593B);
+}
+
+.mavi-content-carousel .mavi-slide-card--navy {
+	border-top: 3px solid var(--wp--preset--color--primary, #2C3A54);
+}
+
+/* Progress counter (1/5 etc) */
+.mavi-content-carousel .splide__pagination {
+	padding-top: 1rem;
 }
 
 /* ==========================================================================

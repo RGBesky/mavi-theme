@@ -18,13 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
    ========================================================================== */
 
 function maviInitCarousels() {
-	const carousels = document.querySelectorAll('.mavi-carousel.splide');
+	if (typeof Splide === 'undefined') return;
 
-	if (carousels.length === 0 || typeof Splide === 'undefined') {
-		return;
-	}
-
-	carousels.forEach(function (carousel) {
+	// Carrousel d'images classique (1 slide à la fois)
+	document.querySelectorAll('.mavi-carousel.splide').forEach(function (carousel) {
 		new Splide(carousel, {
 			type: 'loop',
 			perPage: 1,
@@ -37,6 +34,34 @@ function maviInitCarousels() {
 			breakpoints: {
 				768: {
 					arrows: false,
+				},
+			},
+		}).mount();
+	});
+
+	// Carrousel de contenu (cartes swipables, multi-slides)
+	document.querySelectorAll('.mavi-content-carousel.splide').forEach(function (carousel) {
+		var perPageAttr = carousel.getAttribute('data-per-page');
+		var perPage = perPageAttr ? parseInt(perPageAttr, 10) : 3;
+
+		new Splide(carousel, {
+			type: 'slide',
+			perPage: perPage,
+			perMove: 1,
+			gap: '1.25rem',
+			padding: { left: '0.25rem', right: '0.25rem' },
+			pagination: true,
+			arrows: true,
+			autoplay: false,
+			pauseOnHover: true,
+			breakpoints: {
+				1024: {
+					perPage: Math.min(perPage, 2),
+				},
+				640: {
+					perPage: 1,
+					arrows: false,
+					padding: { left: '0', right: '0' },
 				},
 			},
 		}).mount();
