@@ -20,9 +20,9 @@
 
 			<!-- wp:group {"className":"splide__slide","layout":{"type":"constrained"}} -->
 			<div class="wp-block-group splide__slide">
-				<!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"4px"}}} -->
-				<figure class="wp-block-image size-large" style="border-radius: 4px;">
-					<img src="" alt="Image 1" style="border-radius: 4px;" />
+				<!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"6px"}}} -->
+				<figure class="wp-block-image size-large" style="border-radius: 6px;">
+					<img src="" alt="Image 1" style="border-radius: 6px;" />
 				</figure>
 				<!-- /wp:image -->
 			</div>
@@ -30,9 +30,9 @@
 
 			<!-- wp:group {"className":"splide__slide","layout":{"type":"constrained"}} -->
 			<div class="wp-block-group splide__slide">
-				<!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"4px"}}} -->
-				<figure class="wp-block-image size-large" style="border-radius: 4px;">
-					<img src="" alt="Image 2" style="border-radius: 4px;" />
+				<!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"6px"}}} -->
+				<figure class="wp-block-image size-large" style="border-radius: 6px;">
+					<img src="" alt="Image 2" style="border-radius: 6px;" />
 				</figure>
 				<!-- /wp:image -->
 			</div>
@@ -40,9 +40,9 @@
 
 			<!-- wp:group {"className":"splide__slide","layout":{"type":"constrained"}} -->
 			<div class="wp-block-group splide__slide">
-				<!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"4px"}}} -->
-				<figure class="wp-block-image size-large" style="border-radius: 4px;">
-					<img src="" alt="Image 3" style="border-radius: 4px;" />
+				<!-- wp:image {"sizeSlug":"large","style":{"border":{"radius":"6px"}}} -->
+				<figure class="wp-block-image size-large" style="border-radius: 6px;">
+					<img src="" alt="Image 3" style="border-radius: 6px;" />
 				</figure>
 				<!-- /wp:image -->
 			</div>

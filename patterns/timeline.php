@@ -4,7 +4,7 @@
  * Slug: mavi/timeline
  * Description: Vue chronologique verticale pour afficher un parcours, des jalons ou des événements.
  * Categories: mavi
- * Keywords: timeline, chronologie, parcours, étapes, notion
+ * Keywords: timeline, chronologie, parcours, étapes
  * Viewport Width: 720
  */
 ?>
@@ -28,8 +28,8 @@
 
 		<!-- wp:group {"className":"mavi-timeline__content","layout":{"type":"constrained"}} -->
 		<div class="wp-block-group mavi-timeline__content">
-			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small","fontWeight":"600"},"color":{"text":"var:preset|color|notion-blue-text"}}} -->
-			<p style="color: var(--wp--preset--color--notion-blue-text); font-size: var(--wp--preset--font-size--small); font-weight: 600;">2024</p>
+			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small","fontWeight":"600"},"color":{"text":"var:preset|color|accent"}}} -->
+			<p style="color: var(--wp--preset--color--accent); font-size: var(--wp--preset--font-size--small); font-weight: 600;">2024</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"var:preset|font-size|large"},"spacing":{"margin":{"top":"var:preset|spacing|10"}}}} -->
@@ -56,8 +56,8 @@
 
 		<!-- wp:group {"className":"mavi-timeline__content","layout":{"type":"constrained"}} -->
 		<div class="wp-block-group mavi-timeline__content">
-			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small","fontWeight":"600"},"color":{"text":"var:preset|color|notion-blue-text"}}} -->
-			<p style="color: var(--wp--preset--color--notion-blue-text); font-size: var(--wp--preset--font-size--small); font-weight: 600;">2022</p>
+			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small","fontWeight":"600"},"color":{"text":"var:preset|color|accent"}}} -->
+			<p style="color: var(--wp--preset--color--accent); font-size: var(--wp--preset--font-size--small); font-weight: 600;">2022</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"var:preset|font-size|large"},"spacing":{"margin":{"top":"var:preset|spacing|10"}}}} -->
@@ -84,8 +84,8 @@
 
 		<!-- wp:group {"className":"mavi-timeline__content","layout":{"type":"constrained"}} -->
 		<div class="wp-block-group mavi-timeline__content">
-			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small","fontWeight":"600"},"color":{"text":"var:preset|color|notion-blue-text"}}} -->
-			<p style="color: var(--wp--preset--color--notion-blue-text); font-size: var(--wp--preset--font-size--small); font-weight: 600;">2020</p>
+			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small","fontWeight":"600"},"color":{"text":"var:preset|color|accent"}}} -->
+			<p style="color: var(--wp--preset--color--accent); font-size: var(--wp--preset--font-size--small); font-weight: 600;">2020</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"var:preset|font-size|large"},"spacing":{"margin":{"top":"var:preset|spacing|10"}}}} -->

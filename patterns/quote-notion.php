@@ -1,10 +1,10 @@
 <?php
 /**
- * Title: Citation Notion
- * Slug: mavi/quote-notion
- * Description: Citation stylisée avec barre latérale gauche, style Notion.
+ * Title: Citation IIACA
+ * Slug: mavi/quote
+ * Description: Citation stylisée avec barre latérale gauche, style IIACA.
  * Categories: mavi
- * Keywords: citation, quote, notion, blockquote
+ * Keywords: citation, quote, blockquote
  * Viewport Width: 720
  */
 ?>

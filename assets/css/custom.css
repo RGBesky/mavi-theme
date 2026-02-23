@@ -1,6 +1,6 @@
 /* ==========================================================================
    MAVI by Besky — Custom Styles
-   Thème Notion-like avec responsive-first design
+   Thème Les ateliers IIACA — responsive-first design
    ========================================================================== */
 
 /* ==========================================================================
@@ -10,7 +10,14 @@
 :root {
 	--mavi-content-padding: clamp(1rem, 4vw, 2rem);
 	--mavi-gap: clamp(0.75rem, 2vw, 1.5rem);
-	--mavi-radius: 4px;
+	--mavi-radius: 6px;
+	/* Brand colors (fallbacks) */
+	--iiaca-navy: #2C3A54;
+	--iiaca-terra: #C1593B;
+	--iiaca-cream: #FAF5EE;
+	--iiaca-sand: #F0E8DC;
+	--iiaca-border: #D9CEBD;
+	--iiaca-muted: #5A6A7E;
 }
 
 /* ==========================================================================
@@ -81,16 +88,16 @@ span a,
 	min-width: unset;
 }
 
-/* Selection color (Notion blue highlight) */
+/* Selection color (terracotta highlight) */
 ::selection {
-	background-color: var(--wp--preset--color--notion-blue-bg, #E7F3F8);
-	color: var(--wp--preset--color--primary, #37352F);
+	background-color: var(--wp--preset--color--terra-bg, #FAEAE3);
+	color: var(--wp--preset--color--primary, #2C3A54);
 }
 
-/* Notion-style separator */
+/* Separator — sable foncé */
 .wp-block-separator {
 	border: none;
-	border-top: 1px solid var(--wp--preset--color--notion-gray-bg, #E9E9E7);
+	border-top: 1px solid var(--wp--preset--color--border, #D9CEBD);
 	opacity: 1;
 }
 
@@ -180,7 +187,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   6. COVER + ICON (Page header Notion)
+   6. COVER + ICON (Page header)
    ========================================================================== */
 
 .mavi-cover-icon {
@@ -220,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
 	top: 80px;
 	bottom: 40px;
 	width: 2px;
-	background-color: var(--wp--preset--color--notion-gray-bg, #E9E9E7);
+	background-color: var(--wp--preset--color--surface, #F0E8DC);
 }
 
 .mavi-timeline__item {
@@ -311,7 +318,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mavi-toc__list ul li a {
-	color: var(--wp--preset--color--secondary, #787774);
+	color: var(--wp--preset--color--secondary, #5A6A7E);
 	text-decoration: none;
 	transition: color 0.15s ease;
 	padding: 0.25rem 0;
@@ -319,7 +326,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mavi-toc__list ul li a:hover {
-	color: var(--wp--preset--color--primary, #37352F);
+	color: var(--wp--preset--color--primary, #2C3A54);
 }
 
 /* Indentation pour sous-niveaux */
@@ -365,17 +372,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Pagination dots — taille touch-friendly */
 .mavi-carousel .splide__pagination__page {
-	background: var(--wp--preset--color--notion-gray-bg, #E9E9E7);
+	background: var(--wp--preset--color--surface, #F0E8DC);
 	width: 10px;
 	height: 10px;
 }
 
 .mavi-carousel .splide__pagination__page.is-active {
-	background: var(--wp--preset--color--primary, #37352F);
+	background: var(--wp--preset--color--accent, #C1593B);
 }
 
 /* ==========================================================================
-   11. QUOTE NOTION
+   11. QUOTE IIACA
    ========================================================================== */
 
 .mavi-quote {
@@ -391,7 +398,7 @@ h1, h2, h3, h4, h5, h6 {
 .mavi-quote cite {
 	font-style: normal;
 	font-size: var(--wp--preset--font-size--small, 0.875rem);
-	color: var(--wp--preset--color--secondary, #787774);
+	color: var(--wp--preset--color--secondary, #5A6A7E);
 }
 
 /* ==========================================================================
@@ -416,14 +423,14 @@ h1, h2, h3, h4, h5, h6 {
 	top: 8px;
 	right: 8px;
 	background: rgba(255, 255, 255, 0.8);
-	border: 1px solid var(--wp--preset--color--notion-gray-bg, #E9E9E7);
+	border: 1px solid var(--wp--preset--color--border, #D9CEBD);
 	border-radius: var(--mavi-radius);
 	padding: 6px 12px;
 	font-size: 0.75rem;
 	cursor: pointer;
 	opacity: 0;
 	transition: opacity 0.15s ease;
-	color: var(--wp--preset--color--secondary, #787774);
+	color: var(--wp--preset--color--secondary, #5A6A7E);
 	font-family: var(--wp--preset--font-family--body);
 	z-index: 2;
 }
@@ -435,7 +442,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .mavi-copy-btn:hover {
 	background: var(--wp--preset--color--background, #FFFFFF);
-	color: var(--wp--preset--color--primary, #37352F);
+	color: var(--wp--preset--color--primary, #2C3A54);
 }
 
 /* ==========================================================================
@@ -685,7 +692,7 @@ h1, h2, h3, h4, h5, h6 {
 		display: block;
 		text-align: center;
 		font-size: 0.75rem;
-		color: var(--wp--preset--color--secondary, #787774);
+		color: var(--wp--preset--color--secondary, #5A6A7E);
 		padding: 0.25rem 0;
 		opacity: 0.7;
 	}

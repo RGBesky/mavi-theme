@@ -12,113 +12,103 @@
 			"palette": [
 				{
 					"slug": "primary",
-					"color": "#37352F",
-					"name": "Primary (Notion Text)"
+					"color": "#2C3A54",
+					"name": "Bleu Marine (texte principal)"
 				},
 				{
 					"slug": "secondary",
-					"color": "#787774",
-					"name": "Secondary (Notion Gray Text)"
+					"color": "#5A6A7E",
+					"name": "Bleu Gris (texte secondaire)"
+				},
+				{
+					"slug": "accent",
+					"color": "#C1593B",
+					"name": "Terracotta (accent)"
+				},
+				{
+					"slug": "accent-light",
+					"color": "#D97B5A",
+					"name": "Terracotta Clair"
 				},
 				{
 					"slug": "background",
-					"color": "#FFFFFF",
-					"name": "Background"
+					"color": "#FAF5EE",
+					"name": "Crème (fond principal)"
 				},
 				{
 					"slug": "surface",
-					"color": "#F7F6F3",
-					"name": "Surface (Notion Light Gray)"
+					"color": "#F0E8DC",
+					"name": "Sable (fond secondaire)"
 				},
 				{
-					"slug": "notion-gray-text",
-					"color": "#787774",
-					"name": "Gris (texte)"
+					"slug": "surface-light",
+					"color": "#F5EFE6",
+					"name": "Sable Clair"
 				},
 				{
-					"slug": "notion-gray-bg",
-					"color": "#F1F1EF",
-					"name": "Gris (fond)"
+					"slug": "white",
+					"color": "#FFFFFF",
+					"name": "Blanc"
 				},
 				{
-					"slug": "notion-brown-text",
-					"color": "#9F6B53",
-					"name": "Marron (texte)"
+					"slug": "border",
+					"color": "#D9CEBD",
+					"name": "Bordure (sable foncé)"
 				},
 				{
-					"slug": "notion-brown-bg",
-					"color": "#F4EEEE",
-					"name": "Marron (fond)"
+					"slug": "navy-light",
+					"color": "#3D4F6E",
+					"name": "Bleu Marine Clair"
 				},
 				{
-					"slug": "notion-orange-text",
-					"color": "#D9730D",
-					"name": "Orange (texte)"
+					"slug": "navy-bg",
+					"color": "#E8ECF2",
+					"name": "Bleu Marine (fond)"
 				},
 				{
-					"slug": "notion-orange-bg",
-					"color": "#FBECDD",
-					"name": "Orange (fond)"
+					"slug": "terra-bg",
+					"color": "#FAEAE3",
+					"name": "Terracotta (fond)"
 				},
 				{
-					"slug": "notion-yellow-text",
-					"color": "#CB912F",
-					"name": "Jaune (texte)"
-				},
-				{
-					"slug": "notion-yellow-bg",
-					"color": "#FBF3DB",
-					"name": "Jaune (fond)"
-				},
-				{
-					"slug": "notion-green-text",
-					"color": "#448361",
+					"slug": "success-text",
+					"color": "#3D7A57",
 					"name": "Vert (texte)"
 				},
 				{
-					"slug": "notion-green-bg",
-					"color": "#EDF3EC",
+					"slug": "success-bg",
+					"color": "#E8F3EB",
 					"name": "Vert (fond)"
 				},
 				{
-					"slug": "notion-blue-text",
-					"color": "#337EA9",
-					"name": "Bleu (texte)"
+					"slug": "warning-text",
+					"color": "#B8860B",
+					"name": "Ambre (texte)"
 				},
 				{
-					"slug": "notion-blue-bg",
-					"color": "#E7F3F8",
-					"name": "Bleu (fond)"
+					"slug": "warning-bg",
+					"color": "#FDF3DC",
+					"name": "Ambre (fond)"
 				},
 				{
-					"slug": "notion-purple-text",
-					"color": "#9065B0",
-					"name": "Violet (texte)"
-				},
-				{
-					"slug": "notion-purple-bg",
-					"color": "#F6F3F9",
-					"name": "Violet (fond)"
-				},
-				{
-					"slug": "notion-pink-text",
-					"color": "#C14C8A",
-					"name": "Rose (texte)"
-				},
-				{
-					"slug": "notion-pink-bg",
-					"color": "#FAF1F5",
-					"name": "Rose (fond)"
-				},
-				{
-					"slug": "notion-red-text",
-					"color": "#D44C47",
+					"slug": "danger-text",
+					"color": "#C0392B",
 					"name": "Rouge (texte)"
 				},
 				{
-					"slug": "notion-red-bg",
-					"color": "#FDEBEC",
+					"slug": "danger-bg",
+					"color": "#FDECEB",
 					"name": "Rouge (fond)"
+				},
+				{
+					"slug": "info-text",
+					"color": "#2C3A54",
+					"name": "Info (texte)"
+				},
+				{
+					"slug": "info-bg",
+					"color": "#E8ECF2",
+					"name": "Info (fond)"
 				}
 			]
 		},
@@ -126,19 +116,19 @@
 			"defaultFontSizes": false,
 			"fontFamilies": [
 				{
-					"fontFamily": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif",
+					"fontFamily": "'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
 					"slug": "body",
-					"name": "Body (Inter)"
+					"name": "Body (Source Sans)"
 				},
 				{
-					"fontFamily": "'Georgia', 'Times New Roman', serif",
+					"fontFamily": "'Playfair Display', 'Georgia', 'Times New Roman', serif",
 					"slug": "heading-serif",
-					"name": "Heading Serif"
+					"name": "Heading Serif (Playfair)"
 				},
 				{
-					"fontFamily": "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+					"fontFamily": "'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif",
 					"slug": "heading-sans",
-					"name": "Heading Sans"
+					"name": "Heading Sans (Source Sans)"
 				},
 				{
 					"fontFamily": "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace",
@@ -244,9 +234,9 @@
 		"elements": {
 			"heading": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--heading-sans)",
+					"fontFamily": "var(--wp--preset--font-family--heading-serif)",
 					"fontWeight": "700",
-					"lineHeight": "1.3"
+					"lineHeight": "1.25"
 				},
 				"color": {
 					"text": "var(--wp--preset--color--primary)"
@@ -274,7 +264,7 @@
 			},
 			"link": {
 				"color": {
-					"text": "var(--wp--preset--color--notion-blue-text)"
+					"text": "var(--wp--preset--color--accent)"
 				},
 				":hover": {
 					"color": {
@@ -301,7 +291,7 @@
 					"fontSize": "0.9rem"
 				},
 				"color": {
-					"background": "var(--wp--preset--color--notion-gray-bg)",
+					"background": "var(--wp--preset--color--surface)",
 					"text": "var(--wp--preset--color--primary)"
 				},
 				"border": {
@@ -335,7 +325,7 @@
 			},
 			"core/separator": {
 				"color": {
-					"text": "var(--wp--preset--color--notion-gray-bg)"
+					"text": "var(--wp--preset--color--border)"
 				},
 				"border": {
 					"width": "1px"

@@ -4,7 +4,7 @@
  * Slug: mavi/cover-icon
  * Description: Image de couverture pleine largeur avec emoji superposé, style page Notion.
  * Categories: mavi
- * Keywords: cover, couverture, icône, emoji, notion, header
+ * Keywords: cover, couverture, icône, emoji, header
  * Viewport Width: 1200
  */
 ?>
