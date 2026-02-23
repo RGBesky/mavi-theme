@@ -101,3 +101,8 @@ function mavi_register_block_pattern_categories() {
 	);
 }
 add_action( 'init', 'mavi_register_block_pattern_categories' );
+
+/**
+ * Importeur Notion → WordPress.
+ */
+require_once get_template_directory() . '/inc/notion-importer.php';
