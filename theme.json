@@ -149,33 +149,39 @@
 			"fontSizes": [
 				{
 					"slug": "small",
-					"size": "0.875rem",
-					"name": "Small (14px)"
+					"size": "clamp(0.8125rem, 0.78rem + 0.16vw, 0.875rem)",
+					"name": "Small (13–14px)",
+					"fluid": false
 				},
 				{
 					"slug": "medium",
-					"size": "1rem",
-					"name": "Medium (16px)"
+					"size": "clamp(0.9375rem, 0.9rem + 0.19vw, 1rem)",
+					"name": "Medium (15–16px)",
+					"fluid": false
 				},
 				{
 					"slug": "large",
-					"size": "1.25rem",
-					"name": "Large (20px)"
+					"size": "clamp(1.0625rem, 0.98rem + 0.42vw, 1.25rem)",
+					"name": "Large (17–20px)",
+					"fluid": false
 				},
 				{
 					"slug": "x-large",
-					"size": "1.5rem",
-					"name": "X-Large (24px)"
+					"size": "clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)",
+					"name": "X-Large (20–24px)",
+					"fluid": false
 				},
 				{
 					"slug": "xx-large",
-					"size": "2rem",
-					"name": "XX-Large (32px)"
+					"size": "clamp(1.5rem, 1.25rem + 1.25vw, 2rem)",
+					"name": "XX-Large (24–32px)",
+					"fluid": false
 				},
 				{
 					"slug": "xxx-large",
-					"size": "2.5rem",
-					"name": "XXX-Large (40px)"
+					"size": "clamp(1.75rem, 1.4rem + 1.75vw, 2.5rem)",
+					"name": "XXX-Large (28–40px)",
+					"fluid": false
 				}
 			]
 		},
@@ -229,11 +235,11 @@
 		"spacing": {
 			"padding": {
 				"top": "0",
-				"right": "var(--wp--preset--spacing--30)",
+				"right": "clamp(1rem, 4vw, 2rem)",
 				"bottom": "0",
-				"left": "var(--wp--preset--spacing--30)"
+				"left": "clamp(1rem, 4vw, 2rem)"
 			},
-			"blockGap": "var(--wp--preset--spacing--30)"
+			"blockGap": "clamp(0.75rem, 2vw, 1rem)"
 		},
 		"elements": {
 			"heading": {

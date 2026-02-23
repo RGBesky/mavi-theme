@@ -1,7 +1,7 @@
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|60"}}}} -->
-<main class="wp-block-group" style="padding-top: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--60);">
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(1rem, 4vw, 1.5rem)","bottom":"clamp(2rem, 5vw, 3rem)"}}}} -->
+<main class="wp-block-group" style="padding-top: clamp(1rem, 4vw, 1.5rem); padding-bottom: clamp(2rem, 5vw, 3rem);">
 
 	<!-- wp:post-title {"level":1} /-->
 
@@ -20,8 +20,8 @@
 	<hr class="wp-block-separator has-alpha-channel-opacity" />
 	<!-- /wp:separator -->
 
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"},"className":"mavi-post-nav"} -->
+	<div class="wp-block-group mavi-post-nav">
 		<!-- wp:post-navigation-link {"type":"previous","label":"← Article précédent"} /-->
 		<!-- wp:post-navigation-link {"label":"Article suivant →"} /-->
 	</div>

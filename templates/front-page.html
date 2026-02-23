@@ -1,23 +1,23 @@
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
-<main class="wp-block-group" style="padding-top: var(--wp--preset--spacing--60); padding-bottom: var(--wp--preset--spacing--60);">
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(2rem, 6vw, 3rem)","bottom":"clamp(2rem, 6vw, 3rem)"}}},"className":"mavi-hero-section"} -->
+<main class="wp-block-group mavi-hero-section" style="padding-top: clamp(2rem, 6vw, 3rem); padding-bottom: clamp(2rem, 6vw, 3rem);">
 
-	<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
+	<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"blockGap":"clamp(0.75rem, 2vw, 1rem)"}}} -->
 	<div class="wp-block-group">
 
-		<!-- wp:image {"align":"center","width":"120px","height":"120px","scale":"cover","sizeSlug":"thumbnail","style":{"border":{"radius":"100%"}}} -->
-		<figure class="wp-block-image aligncenter size-thumbnail is-resized" style="border-radius: 100%;">
-			<img src="" alt="Photo de profil" style="border-radius: 100%; object-fit: cover; width: 120px; height: 120px;" />
+		<!-- wp:image {"align":"center","width":"clamp(80px, 15vw, 120px)","height":"clamp(80px, 15vw, 120px)","scale":"cover","sizeSlug":"thumbnail","style":{"border":{"radius":"100%"}},"className":"mavi-hero-avatar"} -->
+		<figure class="wp-block-image aligncenter size-thumbnail is-resized mavi-hero-avatar" style="border-radius: 100%;">
+			<img src="" alt="Photo de profil" style="border-radius: 100%; object-fit: cover; width: clamp(80px, 15vw, 120px); height: clamp(80px, 15vw, 120px);" />
 		</figure>
 		<!-- /wp:image -->
 
-		<!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"var:preset|font-size|xx-large"}}} -->
-		<h1 class="wp-block-heading has-text-align-center" style="font-size: var(--wp--preset--font-size--xx-large);">Robert GASTON</h1>
+		<!-- wp:heading {"textAlign":"center","level":1,"style":{"typography":{"fontSize":"clamp(1.5rem, 1.25rem + 1.25vw, 2rem)"}}} -->
+		<h1 class="wp-block-heading has-text-align-center" style="font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);">Robert GASTON</h1>
 		<!-- /wp:heading -->
 
-		<!-- wp:paragraph {"align":"center","style":{"color":{"text":"var:preset|color|secondary"},"typography":{"fontSize":"var:preset|font-size|large"}}} -->
-		<p class="has-text-align-center" style="color: var(--wp--preset--color--secondary); font-size: var(--wp--preset--font-size--large);">Développeur · Créateur · Maker</p>
+		<!-- wp:paragraph {"align":"center","style":{"color":{"text":"var:preset|color|secondary"},"typography":{"fontSize":"clamp(1rem, 0.9rem + 0.5vw, 1.25rem)"}}} -->
+		<p class="has-text-align-center" style="color: var(--wp--preset--color--secondary); font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);">Développeur · Créateur · Maker</p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:paragraph {"align":"center","style":{"color":{"text":"var:preset|color|secondary"}}} -->
@@ -31,9 +31,9 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"center"},"style":{"spacing":{"blockGap":"var:preset|spacing|30","margin":{"top":"var:preset|spacing|40"}}}} -->
-	<div class="wp-block-group" style="margin-top: var(--wp--preset--spacing--40);">
-		<!-- wp:navigation {"layout":{"type":"flex","justifyContent":"center"},"style":{"typography":{"fontSize":"var:preset|font-size|medium"}}} -->
+	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"},"style":{"spacing":{"blockGap":"clamp(0.5rem, 2vw, 1rem)","margin":{"top":"clamp(1rem, 3vw, 1.5rem)"}}}} -->
+	<div class="wp-block-group" style="margin-top: clamp(1rem, 3vw, 1.5rem);">
+		<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"},"style":{"typography":{"fontSize":"var:preset|font-size|medium"}}} -->
 			<!-- wp:navigation-link {"label":"Parcours","url":"#parcours"} /-->
 			<!-- wp:navigation-link {"label":"Portfolio","url":"#portfolio"} /-->
 			<!-- wp:navigation-link {"label":"Blog","url":"/blog"} /-->

@@ -9,8 +9,8 @@
  */
 ?>
 
-<!-- wp:group {"align":"full","style":{"color":{"background":"var:preset|color|notion-gray-bg"},"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}}},"layout":{"type":"constrained"},"className":"mavi-section"} -->
-<div class="wp-block-group alignfull mavi-section" style="background-color: var(--wp--preset--color--notion-gray-bg); padding-top: var(--wp--preset--spacing--60); padding-right: var(--wp--preset--spacing--30); padding-bottom: var(--wp--preset--spacing--60); padding-left: var(--wp--preset--spacing--30);">
+<!-- wp:group {"align":"full","style":{"color":{"background":"var:preset|color|notion-gray-bg"},"spacing":{"padding":{"top":"clamp(2rem, 5vw, 3rem)","bottom":"clamp(2rem, 5vw, 3rem)","left":"clamp(1rem, 4vw, 2rem)","right":"clamp(1rem, 4vw, 2rem)"}},"className":"mavi-section"},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull mavi-section" style="background-color: var(--wp--preset--color--notion-gray-bg); padding-top: clamp(2rem, 5vw, 3rem); padding-right: clamp(1rem, 4vw, 2rem); padding-bottom: clamp(2rem, 5vw, 3rem); padding-left: clamp(1rem, 4vw, 2rem);">
 
 	<!-- wp:heading {"textAlign":"center"} -->
 	<h2 class="wp-block-heading has-text-align-center">Titre de la section</h2>
