@@ -115,3 +115,8 @@ add_action( 'init', 'mavi_register_block_pattern_categories' );
  * Importeur Notion → WordPress.
  */
 require_once get_template_directory() . '/inc/notion-importer.php';
+
+/**
+ * Guide admin & infobulles.
+ */
+require_once get_template_directory() . '/inc/admin-guide.php';
