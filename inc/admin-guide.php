@@ -154,22 +154,30 @@ class Mavi_Admin_Guide {
 	 */
 	public static function render_dashboard_widget() {
 		?>
-		<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-			<a href="<?php echo admin_url( 'site-editor.php' ); ?>" class="button" style="text-align:center;">
-				🎨 Éditeur de site
+		<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+			<a href="<?php echo admin_url( 'site-editor.php' ); ?>" class="button button-primary" style="text-align:center;">
+				🎨 Constructeur
 			</a>
-			<a href="<?php echo admin_url( 'tools.php?page=mavi-notion-import' ); ?>" class="button" style="text-align:center;">
-				📥 Import Notion
-			</a>
-			<a href="<?php echo admin_url( 'themes.php?page=mavi-guide' ); ?>" class="button" style="text-align:center;">
-				💡 Guide complet
+			<a href="<?php echo admin_url( 'post-new.php' ); ?>" class="button" style="text-align:center;">
+				✏️ Nouvel article
 			</a>
 			<a href="<?php echo admin_url( 'post-new.php?post_type=page' ); ?>" class="button" style="text-align:center;">
 				📄 Nouvelle page
 			</a>
 		</div>
+		<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;">
+			<a href="<?php echo admin_url( 'tools.php?page=mavi-notion-import' ); ?>" class="button" style="text-align:center;">
+				📥 Import Notion
+			</a>
+			<a href="<?php echo admin_url( 'themes.php?page=mavi-guide' ); ?>" class="button" style="text-align:center;">
+				💡 Guide
+			</a>
+			<a href="<?php echo admin_url( 'upload.php' ); ?>" class="button" style="text-align:center;">
+				🖼️ Médias
+			</a>
+		</div>
 		<p style="margin:12px 0 4px;color:#666;font-size:0.9em;">
-			💡 Dans l'éditeur, cliquez <strong>+</strong> → <strong>Compositions</strong> → <strong>MAVI</strong> pour les patterns prêts à l'emploi.
+			💡 <strong>Constructeur</strong> = éditeur complet du thème (templates, headers, footers, styles).
 		</p>
 		<?php
 	}
@@ -183,12 +191,47 @@ class Mavi_Admin_Guide {
 		}
 
 		$wp_admin_bar->add_node( array(
-			'id'    => 'mavi-guide',
-			'title' => '💡 Guide MAVI',
-			'href'  => admin_url( 'themes.php?page=mavi-guide' ),
+			'id'    => 'mavi-theme-menu',
+			'title' => '🎨 MAVI',
+			'href'  => admin_url( 'site-editor.php' ),
 			'meta'  => array(
-				'title' => 'Aide et guide du thème MAVI',
+				'title' => 'Thème MAVI — Accès rapide',
 			),
+		) );
+
+		$wp_admin_bar->add_node( array(
+			'id'     => 'mavi-constructor',
+			'parent' => 'mavi-theme-menu',
+			'title'  => '🎨 Constructeur du thème',
+			'href'   => admin_url( 'site-editor.php' ),
+		) );
+
+		$wp_admin_bar->add_node( array(
+			'id'     => 'mavi-guide',
+			'parent' => 'mavi-theme-menu',
+			'title'  => '💡 Guide MAVI',
+			'href'   => admin_url( 'themes.php?page=mavi-guide' ),
+		) );
+
+		$wp_admin_bar->add_node( array(
+			'id'     => 'mavi-notion',
+			'parent' => 'mavi-theme-menu',
+			'title'  => '📥 Import Notion',
+			'href'   => admin_url( 'tools.php?page=mavi-notion-import' ),
+		) );
+
+		$wp_admin_bar->add_node( array(
+			'id'     => 'mavi-new-post',
+			'parent' => 'mavi-theme-menu',
+			'title'  => '✏️ Nouvel article',
+			'href'   => admin_url( 'post-new.php' ),
+		) );
+
+		$wp_admin_bar->add_node( array(
+			'id'     => 'mavi-new-page',
+			'parent' => 'mavi-theme-menu',
+			'title'  => '📄 Nouvelle page',
+			'href'   => admin_url( 'post-new.php?post_type=page' ),
 		) );
 	}
 
