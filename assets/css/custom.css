@@ -118,6 +118,37 @@ span a,
 	flex-wrap: wrap !important;
 }
 
+/* Brand group — logo + titre alignés */
+.mavi-header__brand {
+	gap: 0.75rem !important;
+	flex-shrink: 0;
+}
+
+.mavi-header__logo {
+	flex-shrink: 0;
+	line-height: 0;
+}
+
+.mavi-header__logo img {
+	width: 40px !important;
+	height: 40px !important;
+	object-fit: contain;
+	border-radius: 50%;
+}
+
+.mavi-header__title {
+	margin: 0 !important;
+}
+
+.mavi-header__title a {
+	text-decoration: none !important;
+	color: var(--wp--preset--color--primary, #2C3A54) !important;
+}
+
+.mavi-header__title a:hover {
+	color: var(--wp--preset--color--accent, #C1593B) !important;
+}
+
 /* Navigation : liens suffisamment espacés pour le touch */
 .wp-block-navigation .wp-block-navigation-item a {
 	padding: 0.5rem 0.75rem;
@@ -669,6 +700,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
+   20. PAGE TEMPLATES — Variantes
+   ========================================================================== */
+
+/* --- Page avec bandeau (cover) --- */
+.mavi-page-cover__banner {
+	margin-bottom: 0;
+}
+
+.mavi-page-cover__image {
+	border-radius: 0;
+}
+
+.mavi-page-cover__image .wp-block-cover__inner-container {
+	max-width: 720px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.mavi-page-cover__title {
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Page sans bandeau (blank) --- */
+.mavi-page-blank {
+	min-height: 60vh;
+}
+
+/* --- Page sans en-tête --- */
+.mavi-page-noheader {
+	min-height: 80vh;
+}
+
+/* ==========================================================================
    RESPONSIVE — TABLET (max 1024px)
    ========================================================================== */
 
@@ -698,20 +762,34 @@ h1, h2, h3, h4, h5, h6 {
 		font-size: 0.9375rem; /* 15px au lieu de 16px */
 	}
 
-	/* ---- Header mobile : titre centré, hamburger gère la nav ---- */
+	/* ---- Header mobile : brand centré, hamburger gère la nav ---- */
 	.mavi-header > .wp-block-group {
-		justify-content: center !important;
+		justify-content: space-between !important;
 		gap: 0.5rem;
+	}
+
+	.mavi-header__brand {
+		flex-grow: 1;
+		justify-content: center !important;
+	}
+
+	.mavi-header__logo img {
+		width: 36px !important;
+		height: 36px !important;
 	}
 
 	.mavi-header .wp-block-site-title {
 		text-align: center;
-		flex-grow: 1;
 	}
 
 	/* S'assurer que le bouton hamburger est bien positionné */
 	.mavi-header .wp-block-navigation {
 		flex-shrink: 0;
+	}
+
+	/* ---- Page cover : réduire le bandeau ---- */
+	.mavi-page-cover__image {
+		min-height: 200px !important;
 	}
 
 	/* ---- Footer : stack vertical ---- */

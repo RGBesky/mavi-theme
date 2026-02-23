@@ -393,6 +393,21 @@
 			"name": "page-full-width",
 			"title": "Plein écran (Full Width)",
 			"postTypes": ["page", "post"]
+		},
+		{
+			"name": "page-cover",
+			"title": "Page avec bandeau",
+			"postTypes": ["page", "post"]
+		},
+		{
+			"name": "page-blank",
+			"title": "Page sans bandeau (contenu seul)",
+			"postTypes": ["page", "post"]
+		},
+		{
+			"name": "page-no-header",
+			"title": "Page sans en-tête",
+			"postTypes": ["page"]
 		}
 	]
 }
