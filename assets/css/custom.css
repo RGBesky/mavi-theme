@@ -158,8 +158,8 @@ header.wp-block-template-part {
 }
 
 .mavi-header__logo img {
-	width: 40px !important;
-	height: 40px !important;
+	width: clamp(44px, 5vw, 56px) !important;
+	height: clamp(44px, 5vw, 56px) !important;
 	object-fit: contain;
 	border-radius: 50%;
 	transition: transform 0.2s ease;
@@ -1045,29 +1045,41 @@ h1, h2, h3, h4, h5, h6 {
 		font-size: 0.9375rem; /* 15px au lieu de 16px */
 	}
 
-	/* ---- Header mobile : brand centré, hamburger gère la nav ---- */
+	/* ---- Header mobile : logo à gauche, hamburger à droite ---- */
 	.mavi-header > .wp-block-group {
 		justify-content: space-between !important;
+		flex-wrap: nowrap !important;
 		gap: 0.5rem;
 	}
 
 	.mavi-header__brand {
-		flex-grow: 1;
-		justify-content: center !important;
+		flex-grow: 0;
+		flex-shrink: 1;
+		min-width: 0;
+		overflow: hidden;
 	}
 
 	.mavi-header__logo img {
-		width: 36px !important;
-		height: 36px !important;
+		width: 40px !important;
+		height: 40px !important;
 	}
 
-	.mavi-header .wp-block-site-title {
-		text-align: center;
+	/* Titre tronqué si trop long sur petit écran */
+	.mavi-header__title {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
-	/* S'assurer que le bouton hamburger est bien positionné */
+	/* Hamburger : toujours à droite, bien aligné */
 	.mavi-header .wp-block-navigation {
 		flex-shrink: 0;
+		margin-left: auto;
+	}
+
+	.wp-block-navigation__responsive-container-open {
+		width: 48px;
+		height: 48px;
 	}
 
 	/* ---- Page cover : réduire le bandeau ---- */
