@@ -1,15 +1,23 @@
-<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(1rem, 3vw, 1.5rem)","bottom":"clamp(1rem, 3vw, 1.5rem)"}},"border":{"top":{"color":"var:preset|color|border","width":"1px"}}},"className":"mavi-footer"} -->
-<div class="wp-block-group mavi-footer" style="border-top: 1px solid var(--wp--preset--color--border); padding-top: clamp(1rem, 3vw, 1.5rem); padding-bottom: clamp(1rem, 3vw, 1.5rem);">
+<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"clamp(2rem, 5vw, 3rem)","bottom":"clamp(2rem, 5vw, 3rem)"}},"color":{"background":"var:preset|color|primary"}},"className":"mavi-footer"} -->
+<div class="wp-block-group mavi-footer" style="background-color: var(--wp--preset--color--primary); padding-top: clamp(2rem, 5vw, 3rem); padding-bottom: clamp(2rem, 5vw, 3rem);">
 
 	<!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
 	<div class="wp-block-group">
 
-		<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"var:preset|color|secondary"}}} -->
-		<p style="color: var(--wp--preset--color--secondary); font-size: var(--wp--preset--font-size--small);">© 2026 MAVI by Besky — Fait avec WordPress</p>
-		<!-- /wp:paragraph -->
+		<!-- wp:group {"layout":{"type":"constrained"},"className":"mavi-footer__info"} -->
+		<div class="wp-block-group mavi-footer__info">
 
-		<!-- wp:social-links {"iconColor":"secondary","iconColorValue":"#5A6A7E","size":"has-small-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|20"}}},"layout":{"type":"flex"}} -->
-		<ul class="wp-block-social-links has-small-icon-size has-icon-color">
+			<!-- wp:site-title {"level":3,"style":{"typography":{"fontSize":"var:preset|font-size|large","fontWeight":"700","fontFamily":"var:preset|font-family|heading-serif"},"color":{"text":"#FFFFFF"}},"className":"mavi-footer__title"} /-->
+
+			<!-- wp:paragraph {"style":{"typography":{"fontSize":"var:preset|font-size|small"},"color":{"text":"#ffffffaa"}}} -->
+			<p style="color: #ffffffaa; font-size: var(--wp--preset--font-size--small);">© 2026 Les ateliers IIACA — Fait avec WordPress</p>
+			<!-- /wp:paragraph -->
+
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:social-links {"iconColor":"white","iconColorValue":"#FFFFFF","size":"has-normal-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|30"}}},"layout":{"type":"flex"},"className":"mavi-footer__social"} -->
+		<ul class="wp-block-social-links has-normal-icon-size has-icon-color mavi-footer__social">
 			<!-- wp:social-link {"url":"https://github.com/besky","service":"github"} /-->
 			<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
 			<!-- wp:social-link {"url":"#","service":"mail"} /-->

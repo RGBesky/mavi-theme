@@ -275,6 +275,27 @@
 					"textDecoration": "underline"
 				}
 			},
+			"button": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--body)",
+					"fontWeight": "600",
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"lineHeight": "1.5"
+				},
+				"color": {
+					"background": "var(--wp--preset--color--accent)",
+					"text": "#FFFFFF"
+				},
+				"border": {
+					"radius": "6px"
+				},
+				":hover": {
+					"color": {
+						"background": "#A84B30",
+						"text": "#FFFFFF"
+					}
+				}
+			},
 			"caption": {
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--small)"
@@ -309,7 +330,7 @@
 			"core/quote": {
 				"border": {
 					"left": {
-						"color": "var(--wp--preset--color--primary)",
+						"color": "var(--wp--preset--color--accent)",
 						"width": "3px",
 						"style": "solid"
 					}
