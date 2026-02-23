@@ -1306,3 +1306,80 @@ h1, h2, h3, h4, h5, h6 {
 		page-break-inside: avoid;
 	}
 }
+/* ═══════════════════════════════════════════════
+   21. STYLES DE LISTES PERSONNALISÉES
+   Sélectionnables via Styles → dans la sidebar de l'éditeur
+══════════════════════════════════════════════ */
+
+/* — Carré ■ */
+.wp-block-list.is-style-mavi-carre {
+	list-style-type: square;
+}
+
+/* — Flèche → */
+.wp-block-list.is-style-mavi-fleche {
+	list-style: none;
+	padding-left: 1.6em;
+}
+.wp-block-list.is-style-mavi-fleche > li {
+	position: relative;
+}
+.wp-block-list.is-style-mavi-fleche > li::before {
+	content: "→";
+	color: var(--wp--preset--color--accent, #C1593B);
+	font-weight: 600;
+	position: absolute;
+	left: -1.6em;
+	width: 1.4em;
+	text-align: left;
+}
+
+/* — Tiret — */
+.wp-block-list.is-style-mavi-tiret {
+	list-style: none;
+	padding-left: 1.6em;
+}
+.wp-block-list.is-style-mavi-tiret > li {
+	position: relative;
+}
+.wp-block-list.is-style-mavi-tiret > li::before {
+	content: "—";
+	color: var(--wp--preset--color--primary, #2C3A54);
+	position: absolute;
+	left: -1.6em;
+	width: 1.4em;
+	text-align: left;
+}
+
+/* — Coche ✓ */
+.wp-block-list.is-style-mavi-coche {
+	list-style: none;
+	padding-left: 1.6em;
+}
+.wp-block-list.is-style-mavi-coche > li {
+	position: relative;
+}
+.wp-block-list.is-style-mavi-coche > li::before {
+	content: "✓";
+	color: #448361;
+	font-weight: 700;
+	position: absolute;
+	left: -1.6em;
+	width: 1.4em;
+	text-align: left;
+}
+
+/* — Point terracotta */
+.wp-block-list.is-style-mavi-accent {
+	list-style: disc;
+}
+.wp-block-list.is-style-mavi-accent > li::marker {
+	color: var(--wp--preset--color--accent, #C1593B);
+	font-size: 1.1em;
+}
+
+/* — Sans puce */
+.wp-block-list.is-style-mavi-sans {
+	list-style: none;
+	padding-left: 0;
+}

@@ -112,6 +112,24 @@ function mavi_register_block_pattern_categories() {
 add_action( 'init', 'mavi_register_block_pattern_categories' );
 
 /**
+ * Styles de listes personnalisées.
+ */
+function mavi_register_list_styles() {
+	$styles = array(
+		array( 'name' => 'mavi-carre',    'label' => 'Carré ■' ),
+		array( 'name' => 'mavi-fleche',   'label' => 'Flèche →' ),
+		array( 'name' => 'mavi-tiret',    'label' => 'Tiret —' ),
+		array( 'name' => 'mavi-coche',    'label' => 'Coche ✓' ),
+		array( 'name' => 'mavi-accent',   'label' => 'Point terracotta' ),
+		array( 'name' => 'mavi-sans',     'label' => 'Sans puce' ),
+	);
+	foreach ( $styles as $style ) {
+		register_block_style( 'core/list', $style );
+	}
+}
+add_action( 'init', 'mavi_register_list_styles' );
+
+/**
  * Importeur Notion → WordPress.
  */
 require_once get_template_directory() . '/inc/notion-importer.php';
