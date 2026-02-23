@@ -114,6 +114,14 @@ span a,
 	z-index: 1000;
 }
 
+/* Le wrapper FSE <header> doit aussi être sticky */
+.wp-block-template-part[data-area="header"],
+header.wp-block-template-part {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
 /* Variante : en-tête centré */
 .mavi-header--centered {
 	text-align: center;
