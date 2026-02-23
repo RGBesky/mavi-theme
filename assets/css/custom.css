@@ -1,0 +1,78 @@
+/* ==========================================================================
+   MAVI by Besky — Custom Styles
+   Styles additionnels pour le thème Notion-like
+   ========================================================================== */
+
+/* --- Notion-style Callout --- */
+.mavi-callout {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+	padding: 1rem 1.25rem;
+	border-radius: 4px;
+	line-height: 1.6;
+}
+
+.mavi-callout__icon {
+	font-size: 1.25rem;
+	flex-shrink: 0;
+	line-height: 1.6;
+}
+
+.mavi-callout__content {
+	flex: 1;
+	min-width: 0;
+}
+
+/* --- Scroll horizontal pour tableaux et images larges --- */
+.mavi-scroll-container {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+}
+
+.mavi-scroll-container::-webkit-scrollbar {
+	height: 6px;
+}
+
+.mavi-scroll-container::-webkit-scrollbar-thumb {
+	background-color: rgba(55, 53, 47, 0.16);
+	border-radius: 3px;
+}
+
+.mavi-scroll-container::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Overflow pour tous les tableaux du thème */
+.wp-block-table {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* --- Smooth transitions --- */
+a,
+button,
+.wp-block-navigation-link {
+	transition: color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+
+/* --- Notion-style separator --- */
+.wp-block-separator {
+	border: none;
+	border-top: 1px solid var(--wp--preset--color--notion-gray-bg, #E9E9E7);
+	opacity: 1;
+}
+
+/* --- Selection color (Notion blue highlight) --- */
+::selection {
+	background-color: var(--wp--preset--color--notion-blue-bg, #E7F3F8);
+	color: var(--wp--preset--color--primary, #37352F);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+	.mavi-callout {
+		padding: 0.75rem 1rem;
+	}
+}

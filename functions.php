@@ -1,0 +1,86 @@
+<?php
+/**
+ * MAVI by Besky — functions.php
+ *
+ * Enqueue styles, scripts et fonctionnalités du thème FSE.
+ *
+ * @package Mavi
+ * @since 1.0.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Enqueue les styles du thème.
+ */
+function mavi_enqueue_styles() {
+	// Style principal (métadonnées du thème)
+	wp_enqueue_style(
+		'mavi-style',
+		get_stylesheet_uri(),
+		array(),
+		wp_get_theme()->get( 'Version' )
+	);
+
+	// Styles custom additionnels
+	if ( file_exists( get_template_directory() . '/assets/css/custom.css' ) ) {
+		wp_enqueue_style(
+			'mavi-custom',
+			get_template_directory_uri() . '/assets/css/custom.css',
+			array( 'mavi-style' ),
+			wp_get_theme()->get( 'Version' )
+		);
+	}
+}
+add_action( 'wp_enqueue_scripts', 'mavi_enqueue_styles' );
+
+/**
+ * Enqueue les scripts du thème.
+ */
+function mavi_enqueue_scripts() {
+	// Script principal
+	if ( file_exists( get_template_directory() . '/assets/js/main.js' ) ) {
+		wp_enqueue_script(
+			'mavi-main',
+			get_template_directory_uri() . '/assets/js/main.js',
+			array(),
+			wp_get_theme()->get( 'Version' ),
+			true
+		);
+	}
+}
+add_action( 'wp_enqueue_scripts', 'mavi_enqueue_scripts' );
+
+/**
+ * Enqueue les styles dans l'éditeur pour un rendu fidèle.
+ */
+function mavi_editor_styles() {
+	add_editor_style( 'style.css' );
+
+	if ( file_exists( get_template_directory() . '/assets/css/custom.css' ) ) {
+		add_editor_style( 'assets/css/custom.css' );
+	}
+}
+add_action( 'after_setup_theme', 'mavi_editor_styles' );
+
+/**
+ * Enregistre les patterns de blocs du thème.
+ */
+function mavi_register_block_pattern_categories() {
+	register_block_pattern_category(
+		'mavi',
+		array(
+			'label' => __( 'MAVI — Notion Style', 'mavi' ),
+		)
+	);
+
+	register_block_pattern_category(
+		'mavi-sections',
+		array(
+			'label' => __( 'MAVI — Sections', 'mavi' ),
+		)
+	);
+}
+add_action( 'init', 'mavi_register_block_pattern_categories' );
