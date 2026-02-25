@@ -656,12 +656,13 @@ class Mavi_Notion_Importer {
 			'teal'   => 'notion-green-bg',
 			'green'  => 'notion-green-bg',
 			'red'    => 'notion-red-bg',
-			'pink'   => 'notion-red-bg',
+			'pink'   => 'notion-pink-bg',
 			'orange' => 'notion-orange-bg',
 			'purple' => 'notion-purple-bg',
 			'gray'   => 'notion-gray-bg',
 			'grey'   => 'notion-gray-bg',
-			'brown'  => 'notion-orange-bg',
+			'brown'  => 'notion-brown-bg',
+			'yellow' => 'notion-yellow-bg',
 		);
 
 		foreach ( $color_map as $key => $value ) {
@@ -750,9 +751,24 @@ class Mavi_Notion_Importer {
 				continue;
 			}
 
-			$text = self::get_inline_content( $li );
+			// Récupérer le texte direct du <li> (sans les sous-listes)
+			$text = self::get_inline_content_shallow( $li );
+			// Chercher les sous-listes imbriquées
+			$nested = '';
+			foreach ( $li->childNodes as $child ) {
+				if ( $child->nodeType !== XML_ELEMENT_NODE ) {
+					continue;
+				}
+				$child_tag = strtolower( $child->tagName );
+				if ( $child_tag === 'ul' ) {
+					$nested .= self::make_list( $child, 'unordered' );
+				} elseif ( $child_tag === 'ol' ) {
+					$nested .= self::make_list( $child, 'ordered' );
+				}
+			}
+
 			$items .= '<!-- wp:list-item -->' . "\n" .
-			           '<li>' . $text . '</li>' . "\n" .
+			           '<li>' . $text . $nested . '</li>' . "\n" .
 			           '<!-- /wp:list-item -->' . "\n";
 		}
 
@@ -936,6 +952,36 @@ class Mavi_Notion_Importer {
 		$html = str_replace( '</span>', '', $html );
 
 		// Supprimer les div inline
+		$html = preg_replace( '/<div[^>]*>/', '', $html );
+		$html = str_replace( '</div>', '', $html );
+
+		return trim( $html );
+	}
+
+	/**
+	 * Récupère le contenu inline d'un nœud SANS inclure les sous-listes (ul/ol).
+	 * Utile pour les <li> qui contiennent des listes imbriquées.
+	 */
+	private static function get_inline_content_shallow( $node ) {
+		$doc = $node->ownerDocument;
+		$html = '';
+		foreach ( $node->childNodes as $child ) {
+			if ( $child->nodeType === XML_ELEMENT_NODE ) {
+				$tag = strtolower( $child->tagName );
+				if ( $tag === 'ul' || $tag === 'ol' ) {
+					continue; // Ignorer les sous-listes
+				}
+			}
+			$html .= $doc->saveHTML( $child );
+		}
+
+		// Mêmes nettoyages que get_inline_content
+		$html = preg_replace( '/<strong[^>]*>/', '<strong>', $html );
+		$html = preg_replace( '/<em[^>]*>/', '<em>', $html );
+		$html = preg_replace( '/<code[^>]*>/', '<code>', $html );
+		$html = preg_replace( '/<a\s+href="([^"]*)"[^>]*>/', '<a href="$1">', $html );
+		$html = preg_replace( '/<span[^>]*>/', '', $html );
+		$html = str_replace( '</span>', '', $html );
 		$html = preg_replace( '/<div[^>]*>/', '', $html );
 		$html = str_replace( '</div>', '', $html );
 

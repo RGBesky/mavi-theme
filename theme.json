@@ -109,6 +109,51 @@
 					"slug": "info-bg",
 					"color": "#E8ECF2",
 					"name": "Info (fond)"
+				},
+				{
+					"slug": "notion-gray-bg",
+					"color": "#F1F1EF",
+					"name": "Notion Gris (fond)"
+				},
+				{
+					"slug": "notion-brown-bg",
+					"color": "#F4EEEE",
+					"name": "Notion Marron (fond)"
+				},
+				{
+					"slug": "notion-orange-bg",
+					"color": "#FBECDD",
+					"name": "Notion Orange (fond)"
+				},
+				{
+					"slug": "notion-yellow-bg",
+					"color": "#FBF3DB",
+					"name": "Notion Jaune (fond)"
+				},
+				{
+					"slug": "notion-green-bg",
+					"color": "#EDF3EC",
+					"name": "Notion Vert (fond)"
+				},
+				{
+					"slug": "notion-blue-bg",
+					"color": "#E7F3F8",
+					"name": "Notion Bleu (fond)"
+				},
+				{
+					"slug": "notion-purple-bg",
+					"color": "#F6F3F9",
+					"name": "Notion Violet (fond)"
+				},
+				{
+					"slug": "notion-pink-bg",
+					"color": "#FBF2F5",
+					"name": "Notion Rose (fond)"
+				},
+				{
+					"slug": "notion-red-bg",
+					"color": "#FDEBEC",
+					"name": "Notion Rouge (fond)"
 				}
 			]
 		},
