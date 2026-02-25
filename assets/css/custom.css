@@ -648,13 +648,40 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: 1rem;
 }
 
+/*
+ * Reset des classes de layout WordPress (is-layout-*)
+ * qui entrent en conflit avec le CSS de Splide.js.
+ */
+.mavi-content-carousel.splide {
+	overflow: visible;
+}
+
+.mavi-content-carousel .splide__track {
+	overflow: hidden !important;
+	display: block !important;
+	max-width: none !important;
+	padding: 0 !important;
+}
+
+.mavi-content-carousel .splide__list {
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	gap: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	max-width: none !important;
+}
+
+.mavi-content-carousel .splide__slide {
+	flex-shrink: 0 !important;
+	float: none !important;
+	margin: 0 !important;
+	max-width: none !important;
+}
+
 /* Chaque carte du carrousel contenu */
 .mavi-content-carousel .splide__slide {
 	padding: 0.5rem;
-	width: 350px;
-	min-width: 280px;
-	max-width: 400px;
-	flex-shrink: 0;
 }
 
 .mavi-content-carousel .mavi-slide-card {

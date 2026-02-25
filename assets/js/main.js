@@ -41,9 +41,21 @@ function maviInitCarousels() {
 
 	// Carrousel de contenu (cartes swipables, multi-slides)
 	document.querySelectorAll('.mavi-content-carousel.splide').forEach(function (carousel) {
+
+		// Nettoyer les classes de layout WordPress qui interfèrent avec Splide
+		maviCleanWPLayoutClasses(carousel);
+
 		var perPageAttr = carousel.getAttribute('data-per-page');
 		var perPage = perPageAttr ? parseInt(perPageAttr, 10) : 3;
 		var fixedWidthAttr = carousel.getAttribute('data-fixed-width');
+
+		// Fallback: extraire la largeur depuis la classe mavi-fw-xxx
+		if (!fixedWidthAttr) {
+			var fwMatch = carousel.className.match(/\bmavi-fw-(\d+)\b/);
+			if (fwMatch) {
+				fixedWidthAttr = fwMatch[1] + 'px';
+			}
+		}
 
 		var opts = {
 			type: 'slide',
@@ -80,6 +92,18 @@ function maviInitCarousels() {
 		}
 
 		new Splide(carousel, opts).mount();
+	});
+}
+
+/**
+ * Supprime les classes WordPress (is-layout-*, has-global-padding, etc.)
+ * sur les éléments Splide internes pour éviter les conflits CSS.
+ */
+function maviCleanWPLayoutClasses(root) {
+	var wpClassPattern = /\b(is-layout-\S+|has-global-padding|wp-container-\S+|wp-block-group-is-layout-\S+)\b/g;
+	var elements = root.querySelectorAll('.splide__track, .splide__list, .splide__slide');
+	elements.forEach(function (el) {
+		el.className = el.className.replace(wpClassPattern, '').replace(/\s{2,}/g, ' ').trim();
 	});
 }
 

@@ -155,6 +155,32 @@ add_action( 'init', 'mavi_register_list_styles' );
 require_once get_template_directory() . '/inc/notion-importer.php';
 
 /**
+ * Filtre le rendu des blocs group pour injecter data-fixed-width
+ * sur les carrousels de contenu (classe mavi-fw-xxx).
+ * Ceci évite d'utiliser un attribut data-* dans le HTML Gutenberg
+ * (qui causerait une erreur de validation de bloc).
+ */
+function mavi_carousel_render_block( $block_content, $block ) {
+	if ( 'core/group' !== $block['blockName'] ) {
+		return $block_content;
+	}
+	$class = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';
+	if ( strpos( $class, 'mavi-content-carousel' ) === false ) {
+		return $block_content;
+	}
+	if ( preg_match( '/\bmavi-fw-(\d+)\b/', $class, $m ) ) {
+		$block_content = preg_replace(
+			'/(<div\b[^>]*class="[^"]*mavi-content-carousel[^"]*")/',
+			'$1 data-fixed-width="' . $m[1] . 'px"',
+			$block_content,
+			1
+		);
+	}
+	return $block_content;
+}
+add_filter( 'render_block', 'mavi_carousel_render_block', 10, 2 );
+
+/**
  * Guide admin & infobulles.
  */
 require_once get_template_directory() . '/inc/admin-guide.php';

@@ -9,8 +9,8 @@
  */
 ?>
 
-<!-- wp:group {"className":"mavi-content-carousel splide","layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}}}} -->
-<div class="wp-block-group mavi-content-carousel splide" data-fixed-width="350px" style="padding-top: var(--wp--preset--spacing--40); padding-bottom: var(--wp--preset--spacing--40);">
+<!-- wp:group {"className":"mavi-content-carousel splide mavi-fw-350","layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}}}} -->
+<div class="wp-block-group mavi-content-carousel splide mavi-fw-350" style="padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40)">
 
 <!-- wp:group {"className":"splide__track","layout":{"type":"default"}} -->
 <div class="wp-block-group splide__track">
