@@ -155,10 +155,13 @@ add_action( 'init', 'mavi_register_list_styles' );
 require_once get_template_directory() . '/inc/notion-importer.php';
 
 /**
- * Filtre le rendu des blocs group pour injecter data-fixed-width
- * sur les carrousels de contenu (classe mavi-fw-xxx).
- * Ceci évite d'utiliser un attribut data-* dans le HTML Gutenberg
- * (qui causerait une erreur de validation de bloc).
+ * Transforme le rendu des blocs mavi-content-carousel :
+ * - Injecte la structure Splide (splide__track > splide__list > splide__slide)
+ *   autour de chaque carte enfant (mavi-slide-card)
+ * - Injecte data-fixed-width à partir de la classe mavi-fw-xxx
+ *
+ * Dans l'éditeur, l'utilisateur voit simplement des cartes côte à côte.
+ * Au rendu côté front, ce filtre construit le DOM que Splide.js attend.
  */
 function mavi_carousel_render_block( $block_content, $block ) {
 	if ( 'core/group' !== $block['blockName'] ) {
@@ -168,15 +171,79 @@ function mavi_carousel_render_block( $block_content, $block ) {
 	if ( strpos( $class, 'mavi-content-carousel' ) === false ) {
 		return $block_content;
 	}
+
+	// Extraire la largeur fixe depuis la classe mavi-fw-xxx
+	$fixed_width = '350px';
 	if ( preg_match( '/\bmavi-fw-(\d+)\b/', $class, $m ) ) {
-		$block_content = preg_replace(
-			'/(<div\b[^>]*class="[^"]*mavi-content-carousel[^"]*")/',
-			'$1 data-fixed-width="' . $m[1] . 'px"',
-			$block_content,
-			1
-		);
+		$fixed_width = $m[1] . 'px';
 	}
-	return $block_content;
+
+	// Utiliser DOMDocument pour restructurer le HTML
+	$dom = new DOMDocument();
+	libxml_use_internal_errors( true );
+	$dom->loadHTML(
+		'<html><body>' . mb_convert_encoding( $block_content, 'HTML-ENTITIES', 'UTF-8' ) . '</body></html>',
+		LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+	);
+	libxml_clear_errors();
+
+	// Trouver le conteneur principal (premier div avec mavi-content-carousel)
+	$xpath    = new DOMXPath( $dom );
+	$carousel = $xpath->query( "//div[contains(@class, 'mavi-content-carousel')]" )->item( 0 );
+	if ( ! $carousel ) {
+		return $block_content;
+	}
+
+	// Ajouter la classe splide et l'attribut data-fixed-width
+	$current_class = $carousel->getAttribute( 'class' );
+	if ( strpos( $current_class, 'splide' ) === false ) {
+		$carousel->setAttribute( 'class', $current_class . ' splide' );
+	}
+	$carousel->setAttribute( 'data-fixed-width', $fixed_width );
+
+	// Collecter les enfants directs qui sont des cartes (mavi-slide-card)
+	$cards = array();
+	foreach ( $carousel->childNodes as $child ) {
+		if ( $child->nodeType === XML_ELEMENT_NODE ) {
+			$cards[] = $child;
+		}
+	}
+
+	if ( empty( $cards ) ) {
+		return $block_content;
+	}
+
+	// Construire splide__track > splide__list
+	$track = $dom->createElement( 'div' );
+	$track->setAttribute( 'class', 'splide__track' );
+	$list = $dom->createElement( 'div' );
+	$list->setAttribute( 'class', 'splide__list' );
+	$track->appendChild( $list );
+
+	// Envelopper chaque carte dans un splide__slide
+	foreach ( $cards as $card ) {
+		$slide = $dom->createElement( 'div' );
+		$slide->setAttribute( 'class', 'splide__slide' );
+		$carousel->removeChild( $card );
+		$slide->appendChild( $card );
+		$list->appendChild( $slide );
+	}
+
+	// Vider le conteneur et y mettre le track
+	// (supprimer les noeuds texte restants)
+	while ( $carousel->firstChild ) {
+		$carousel->removeChild( $carousel->firstChild );
+	}
+	$carousel->appendChild( $track );
+
+	// Extraire le HTML résultant
+	$body   = $dom->getElementsByTagName( 'body' )->item( 0 );
+	$result = '';
+	foreach ( $body->childNodes as $child ) {
+		$result .= $dom->saveHTML( $child );
+	}
+
+	return $result;
 }
 add_filter( 'render_block', 'mavi_carousel_render_block', 10, 2 );
 

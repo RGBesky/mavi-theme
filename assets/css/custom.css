@@ -649,6 +649,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*
+ * Aperçu éditeur : les cartes sont affichées côte à côte
+ * dans un conteneur flex wrap. Le carrousel Splide ne
+ * s'active que côté front-end via le filtre PHP.
+ */
+.mavi-content-carousel .mavi-slide-card {
+	width: 350px;
+	min-width: 280px;
+	flex-shrink: 0;
+}
+
+/*
  * Reset des classes de layout WordPress (is-layout-*)
  * qui entrent en conflit avec le CSS de Splide.js.
  */
