@@ -92,6 +92,26 @@ function mavi_editor_styles() {
 add_action( 'after_setup_theme', 'mavi_editor_styles' );
 
 /**
+ * Emoji picker style Notion dans l'éditeur Gutenberg.
+ */
+function mavi_enqueue_editor_emoji_picker() {
+	wp_enqueue_style(
+		'mavi-emoji-picker',
+		get_template_directory_uri() . '/assets/css/emoji-picker.css',
+		array(),
+		filemtime( get_template_directory() . '/assets/css/emoji-picker.css' )
+	);
+	wp_enqueue_script(
+		'mavi-emoji-picker',
+		get_template_directory_uri() . '/assets/js/emoji-picker.js',
+		array(),
+		filemtime( get_template_directory() . '/assets/js/emoji-picker.js' ),
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'mavi_enqueue_editor_emoji_picker' );
+
+/**
  * Enregistre les patterns de blocs du thème.
  */
 function mavi_register_block_pattern_categories() {
