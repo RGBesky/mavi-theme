@@ -593,7 +593,7 @@ class Mavi_Notion_Importer {
 
 		return sprintf(
 			'<!-- wp:group {"style":{"color":{"background":"var:preset|color|%s"},"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}},"border":{"radius":"6px"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"},"className":"mavi-callout"} -->' . "\n" .
-			'<div class="wp-block-group mavi-callout" style="border-radius: 6px; background-color: var(--wp--preset--color--%s); padding-top: var(--wp--preset--spacing--30); padding-right: var(--wp--preset--spacing--30); padding-bottom: var(--wp--preset--spacing--30); padding-left: var(--wp--preset--spacing--30);">' . "\n" .
+			'<div class="wp-block-group has-%s-background-color has-background mavi-callout" style="border-radius: 6px; padding-top: var(--wp--preset--spacing--30); padding-right: var(--wp--preset--spacing--30); padding-bottom: var(--wp--preset--spacing--30); padding-left: var(--wp--preset--spacing--30);">' . "\n" .
 			'<!-- wp:paragraph {"style":{"typography":{"fontSize":"1.25rem"}},"className":"mavi-callout__icon"} -->' . "\n" .
 			'<p class="mavi-callout__icon" style="font-size: 1.25rem;">%s</p>' . "\n" .
 			'<!-- /wp:paragraph -->' . "\n" .
