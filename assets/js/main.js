@@ -43,10 +43,10 @@ function maviInitCarousels() {
 	document.querySelectorAll('.mavi-content-carousel.splide').forEach(function (carousel) {
 		var perPageAttr = carousel.getAttribute('data-per-page');
 		var perPage = perPageAttr ? parseInt(perPageAttr, 10) : 3;
+		var fixedWidthAttr = carousel.getAttribute('data-fixed-width');
 
-		new Splide(carousel, {
+		var opts = {
 			type: 'slide',
-			perPage: perPage,
 			perMove: 1,
 			gap: '1.25rem',
 			padding: { left: '0.25rem', right: '0.25rem' },
@@ -54,6 +54,7 @@ function maviInitCarousels() {
 			arrows: true,
 			autoplay: false,
 			pauseOnHover: true,
+			autoWidth: false,
 			breakpoints: {
 				1024: {
 					perPage: Math.min(perPage, 2),
@@ -64,7 +65,21 @@ function maviInitCarousels() {
 					padding: { left: '0', right: '0' },
 				},
 			},
-		}).mount();
+		};
+
+		// Prefer fixedWidth for consistent slide sizing
+		if (fixedWidthAttr) {
+			opts.fixedWidth = fixedWidthAttr;
+			opts.breakpoints[640] = {
+				fixedWidth: '100%',
+				arrows: false,
+				padding: { left: '0', right: '0' },
+			};
+		} else {
+			opts.perPage = perPage;
+		}
+
+		new Splide(carousel, opts).mount();
 	});
 }
 
