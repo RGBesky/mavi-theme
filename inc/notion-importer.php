@@ -395,8 +395,18 @@ class Mavi_Notion_Importer {
 				continue;
 			}
 
+			// Ignorer le header Notion (icône de page, description vide)
+			if ( strpos( $class, 'page-header-icon' ) !== false || strpos( $class, 'page-description' ) !== false ) {
+				continue;
+			}
+
 			// Traitement par type d'élément Notion
 			switch ( true ) {
+				// Callout Notion — AVANT les checks de tag car <figure> peut être un callout
+				case strpos( $class, 'callout' ) !== false:
+					$blocks .= self::make_callout( $child, $images_dir, $image_count );
+					break;
+
 				// Headings
 				case $tag === 'h1':
 					$blocks .= self::make_heading( $child, 1 );
@@ -408,11 +418,6 @@ class Mavi_Notion_Importer {
 
 				case $tag === 'h3':
 					$blocks .= self::make_heading( $child, 3 );
-					break;
-
-				// Callout Notion
-				case strpos( $class, 'callout' ) !== false:
-					$blocks .= self::make_callout( $child );
 					break;
 
 				// Toggle Notion
@@ -472,12 +477,9 @@ class Mavi_Notion_Importer {
 
 				// Div / Article / Section — Recurse
 				case in_array( $tag, array( 'div', 'article', 'section', 'main', 'header', 'body', 'span' ), true ):
-					// Vérifier si c'est un callout Notion (peut être un div)
-					if ( strpos( $class, 'callout' ) !== false ) {
-						$blocks .= self::make_callout( $child );
-					} elseif ( strpos( $class, 'column' ) !== false && strpos( $class, 'list' ) !== false ) {
-						// Colonnes Notion — les traiter comme du contenu linéaire
-						$blocks .= self::convert_node_to_blocks( $child, $images_dir, $image_count );
+					if ( strpos( $class, 'column-list' ) !== false ) {
+						// Colonnes Notion → wp:columns
+						$blocks .= self::make_columns( $child, $images_dir, $image_count );
 					} else {
 						$blocks .= self::convert_node_to_blocks( $child, $images_dir, $image_count );
 					}
@@ -537,10 +539,10 @@ class Mavi_Notion_Importer {
 		);
 	}
 
-	private static function make_callout( $node ) {
+	private static function make_callout( $node, $images_dir = '', &$image_count = 0 ) {
 		// Extraire l'icône (premier emoji ou texte d'icône)
 		$icon = '💡';
-		$content = '';
+		$content_blocks = '';
 
 		foreach ( $node->childNodes as $child ) {
 			if ( $child->nodeType !== XML_ELEMENT_NODE ) {
@@ -549,44 +551,45 @@ class Mavi_Notion_Importer {
 
 			$child_class = $child->getAttribute( 'class' ) ?? '';
 
+			// Extraire l'icône
 			if ( strpos( $child_class, 'icon' ) !== false ) {
 				$icon_text = trim( $child->textContent );
 				if ( ! empty( $icon_text ) ) {
 					$icon = $icon_text;
 				}
-			} else {
-				$text = trim( $child->textContent );
-				if ( ! empty( $text ) ) {
-					$content .= $text . ' ';
+				continue;
+			}
+
+			// Contenu du callout : convertir récursivement pour garder le formatage
+			$child_tag = strtolower( $child->tagName );
+			if ( $child_tag === 'p' ) {
+				$text = self::get_inline_content( $child );
+				if ( ! empty( trim( strip_tags( $text ) ) ) ) {
+					$content_blocks .= self::make_paragraph( $text );
 				}
+			} elseif ( in_array( $child_tag, array( 'div', 'span' ), true ) ) {
+				// Notion wraps callout paragraphs in <div style="display:contents">
+				$content_blocks .= self::convert_callout_inner( $child, $images_dir, $image_count );
+			} else {
+				$content_blocks .= self::convert_node_to_blocks( $child, $images_dir, $image_count );
 			}
 		}
 
-		if ( empty( $content ) ) {
-			$content = trim( $node->textContent );
+		// Fallback si aucun bloc extrait
+		if ( empty( trim( $content_blocks ) ) ) {
+			$text = trim( $node->textContent );
+			// Retirer l'icône du texte si elle est au début
+			if ( ! empty( $icon ) && mb_strpos( $text, $icon ) === 0 ) {
+				$text = trim( mb_substr( $text, mb_strlen( $icon ) ) );
+			}
+			if ( empty( $text ) ) {
+				return '';
+			}
+			$content_blocks = self::make_paragraph( esc_html( $text ) );
 		}
 
-		$content = trim( $content );
-		if ( empty( $content ) ) {
-			return '';
-		}
-
-		// Déterminer la couleur basée sur le style inline ou par défaut
-		$bg_color = 'notion-yellow-bg';
-		$style_attr = $node->getAttribute( 'style' ) ?? '';
-		if ( strpos( $style_attr, 'blue' ) !== false ) {
-			$bg_color = 'notion-blue-bg';
-		} elseif ( strpos( $style_attr, 'green' ) !== false ) {
-			$bg_color = 'notion-green-bg';
-		} elseif ( strpos( $style_attr, 'red' ) !== false || strpos( $style_attr, 'pink' ) !== false ) {
-			$bg_color = 'notion-red-bg';
-		} elseif ( strpos( $style_attr, 'orange' ) !== false ) {
-			$bg_color = 'notion-orange-bg';
-		} elseif ( strpos( $style_attr, 'purple' ) !== false ) {
-			$bg_color = 'notion-purple-bg';
-		} elseif ( strpos( $style_attr, 'gray' ) !== false || strpos( $style_attr, 'grey' ) !== false ) {
-			$bg_color = 'notion-gray-bg';
-		}
+		// Déterminer la couleur basée sur la CLASSE (pas le style inline)
+		$bg_color = self::detect_callout_color( $node );
 
 		return sprintf(
 			'<!-- wp:group {"style":{"color":{"background":"var:preset|color|%s"},"spacing":{"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30","right":"var:preset|spacing|30"}},"border":{"radius":"4px"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"top"},"className":"mavi-callout"} -->' . "\n" .
@@ -596,15 +599,78 @@ class Mavi_Notion_Importer {
 			'<!-- /wp:paragraph -->' . "\n" .
 			'<!-- wp:group {"layout":{"type":"constrained"},"className":"mavi-callout__content"} -->' . "\n" .
 			'<div class="wp-block-group mavi-callout__content">' . "\n" .
-			'<!-- wp:paragraph -->' . "\n" .
-			'<p>%s</p>' . "\n" .
-			'<!-- /wp:paragraph -->' . "\n" .
+			'%s' .
 			'</div>' . "\n" .
 			'<!-- /wp:group -->' . "\n" .
 			'</div>' . "\n" .
 			'<!-- /wp:group -->' . "\n\n",
-			$bg_color, $bg_color, esc_html( $icon ), esc_html( $content )
+			$bg_color, $bg_color, esc_html( $icon ), $content_blocks
 		);
+	}
+
+	/**
+	 * Convertit le contenu interne d'un callout (divs display:contents contenant des <p>).
+	 */
+	private static function convert_callout_inner( $node, $images_dir, &$image_count ) {
+		$blocks = '';
+		foreach ( $node->childNodes as $child ) {
+			if ( $child->nodeType === XML_TEXT_NODE ) {
+				$text = trim( $child->textContent );
+				if ( ! empty( $text ) ) {
+					$blocks .= self::make_paragraph( esc_html( $text ) );
+				}
+				continue;
+			}
+			if ( $child->nodeType !== XML_ELEMENT_NODE ) {
+				continue;
+			}
+
+			$child_tag = strtolower( $child->tagName );
+			$child_class = $child->getAttribute( 'class' ) ?? '';
+
+			if ( $child_tag === 'p' ) {
+				$text = self::get_inline_content( $child );
+				if ( ! empty( trim( strip_tags( $text ) ) ) ) {
+					$blocks .= self::make_paragraph( $text );
+				}
+			} elseif ( in_array( $child_tag, array( 'div', 'span' ), true ) && strpos( $child_class, 'icon' ) === false ) {
+				$blocks .= self::convert_callout_inner( $child, $images_dir, $image_count );
+			} elseif ( strpos( $child_class, 'icon' ) === false ) {
+				$blocks .= self::convert_node_to_blocks( $child, $images_dir, $image_count );
+			}
+		}
+		return $blocks;
+	}
+
+	/**
+	 * Détecte la couleur d'un callout Notion à partir de la classe CSS.
+	 * Notion utilise des classes comme : block-color-blue_background, block-color-teal_background, etc.
+	 */
+	private static function detect_callout_color( $node ) {
+		$class = $node->getAttribute( 'class' ) ?? '';
+		$style = $node->getAttribute( 'style' ) ?? '';
+		$source = $class . ' ' . $style;
+
+		$color_map = array(
+			'blue'   => 'notion-blue-bg',
+			'teal'   => 'notion-green-bg',
+			'green'  => 'notion-green-bg',
+			'red'    => 'notion-red-bg',
+			'pink'   => 'notion-red-bg',
+			'orange' => 'notion-orange-bg',
+			'purple' => 'notion-purple-bg',
+			'gray'   => 'notion-gray-bg',
+			'grey'   => 'notion-gray-bg',
+			'brown'  => 'notion-orange-bg',
+		);
+
+		foreach ( $color_map as $key => $value ) {
+			if ( stripos( $source, $key ) !== false ) {
+				return $value;
+			}
+		}
+
+		return 'notion-yellow-bg';
 	}
 
 	private static function make_toggle( $node, $images_dir, &$image_count ) {
@@ -774,6 +840,64 @@ class Mavi_Notion_Importer {
 		return '<!-- wp:separator -->' . "\n" .
 		       '<hr class="wp-block-separator has-alpha-channel-opacity" />' . "\n" .
 		       '<!-- /wp:separator -->' . "\n\n";
+	}
+
+	/**
+	 * Convertit une column-list Notion en blocs wp:columns.
+	 */
+	private static function make_columns( $node, $images_dir, &$image_count ) {
+		$columns = array();
+
+		// Parcourir les enfants pour trouver les colonnes
+		foreach ( $node->childNodes as $child ) {
+			if ( $child->nodeType !== XML_ELEMENT_NODE ) {
+				continue;
+			}
+
+			$child_class = $child->getAttribute( 'class' ) ?? '';
+
+			// Notion enveloppe chaque colonne dans <div style="display:contents"><div class="column">
+			if ( strpos( $child_class, 'column' ) !== false && strpos( $child_class, 'column-list' ) === false ) {
+				$col_content = self::convert_node_to_blocks( $child, $images_dir, $image_count );
+				if ( ! empty( trim( $col_content ) ) ) {
+					$columns[] = $col_content;
+				}
+			} else {
+				// Dig into display:contents wrappers
+				foreach ( $child->childNodes as $inner ) {
+					if ( $inner->nodeType !== XML_ELEMENT_NODE ) {
+						continue;
+					}
+					$inner_class = $inner->getAttribute( 'class' ) ?? '';
+					if ( strpos( $inner_class, 'column' ) !== false && strpos( $inner_class, 'column-list' ) === false ) {
+						$col_content = self::convert_node_to_blocks( $inner, $images_dir, $image_count );
+						if ( ! empty( trim( $col_content ) ) ) {
+							$columns[] = $col_content;
+						}
+					}
+				}
+			}
+		}
+
+		// Fallback : si aucune colonne trouvée, traiter comme du contenu linéaire
+		if ( empty( $columns ) ) {
+			return self::convert_node_to_blocks( $node, $images_dir, $image_count );
+		}
+
+		// Construire le bloc wp:columns
+		$output = '<!-- wp:columns -->' . "\n" . '<div class="wp-block-columns">' . "\n";
+
+		foreach ( $columns as $col_content ) {
+			$output .= '<!-- wp:column -->' . "\n" .
+			            '<div class="wp-block-column">' . "\n" .
+			            $col_content .
+			            '</div>' . "\n" .
+			            '<!-- /wp:column -->' . "\n";
+		}
+
+		$output .= '</div>' . "\n" . '<!-- /wp:columns -->' . "\n\n";
+
+		return $output;
 	}
 
 	private static function make_table( $node ) {
