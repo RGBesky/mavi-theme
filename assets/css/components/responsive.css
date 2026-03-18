@@ -1,0 +1,291 @@
+/* ==========================================================================
+   RESPONSIVE — TABLET (max 1024px)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+	/* Colonnes WP : 2 colonnes max sur tablette */
+	.wp-block-columns:not(.is-not-stacked-on-mobile) {
+		flex-wrap: wrap;
+	}
+
+	.wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column {
+		flex-basis: calc(50% - var(--mavi-gap) / 2) !important;
+	}
+
+	/* Réduire le padding des sections cover */
+	.mavi-section-cover .wp-block-cover {
+		min-height: 250px;
+	}
+}
+
+/* ==========================================================================
+   RESPONSIVE — MOBILE (max 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+	/* ---- Layout global ---- */
+	body {
+		font-size: 0.9375rem; /* 15px au lieu de 16px */
+	}
+
+	/* ---- Header mobile : logo à gauche, hamburger à droite ---- */
+	.mavi-header > .wp-block-group {
+		justify-content: space-between !important;
+		flex-wrap: nowrap !important;
+		gap: 0.5rem;
+	}
+
+	.mavi-header__brand {
+		flex-grow: 0;
+		flex-shrink: 1;
+		min-width: 0;
+		overflow: hidden;
+	}
+
+	.mavi-header__logo img {
+		width: 40px !important;
+		height: 40px !important;
+	}
+
+	/* Titre sur plusieurs lignes */
+	.mavi-header__title {
+		overflow: visible;
+		white-space: normal;
+		line-height: 1.2;
+	}
+
+	/* Hamburger : toujours à droite, bien aligné */
+	.mavi-header .wp-block-navigation {
+		flex-shrink: 0;
+		margin-left: auto;
+	}
+
+	.wp-block-navigation__responsive-container-open {
+		width: 48px;
+		height: 48px;
+	}
+
+	/* ---- Page cover : réduire le bandeau ---- */
+	.mavi-page-cover__image {
+		min-height: 200px !important;
+	}
+
+	/* ---- Footer : stack vertical ---- */
+	.mavi-footer > .wp-block-group {
+		flex-direction: column !important;
+		align-items: center !important;
+		text-align: center;
+		gap: 0.75rem;
+	}
+
+	/* ---- Colonnes : stack complet ---- */
+	.wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+
+	/* ---- Callouts ---- */
+	.mavi-callout {
+		padding: 0.75rem;
+	}
+
+	/* ---- Timeline : layout simplifié ---- */
+	.mavi-timeline::before {
+		display: none;
+	}
+
+	.mavi-timeline__item {
+		flex-direction: column !important;
+		gap: 0.25rem !important;
+	}
+
+	.mavi-timeline__marker {
+		width: auto;
+		margin-bottom: 0.25rem;
+		justify-content: flex-start;
+	}
+
+	/* ---- Project cards ---- */
+	.mavi-project-card img {
+		height: clamp(140px, 40vw, 200px);
+	}
+
+	/* ---- Cover icon ---- */
+	.mavi-cover-icon__emoji {
+		font-size: 3rem !important;
+		margin-top: -1.5rem !important;
+	}
+
+	.mavi-cover-icon__image .wp-block-cover {
+		min-height: 150px;
+	}
+
+	/* ---- Post nav prev/next : stack ---- */
+	.mavi-post-nav {
+		flex-direction: column !important;
+		align-items: stretch !important;
+	}
+
+	.mavi-post-nav .wp-block-post-navigation-link {
+		text-align: center;
+	}
+
+	/* ---- Carousel : pagination plus grosse pour le touch ---- */
+	.mavi-carousel .splide__pagination__page {
+		width: 12px;
+		height: 12px;
+	}
+
+	/* ---- Code block : copy button visible (pas de hover sur touch) ---- */
+	.mavi-copy-btn {
+		opacity: 1;
+		position: relative;
+		top: auto;
+		right: auto;
+		display: block;
+		margin: 0.5rem 0 0 auto;
+		width: fit-content;
+	}
+
+	/* ---- TOC : moins d'indent ---- */
+	.mavi-toc__list ul li.toc-h3 {
+		padding-left: 0.75rem;
+	}
+
+	.mavi-toc__list ul li.toc-h4 {
+		padding-left: 1.5rem;
+	}
+
+	/* ---- Tables : indicateur de scroll ---- */
+	.wp-block-table {
+		position: relative;
+	}
+
+	.wp-block-table::after {
+		content: "← glisser →";
+		display: block;
+		text-align: center;
+		font-size: 0.75rem;
+		color: var(--wp--preset--color--secondary, #5A6A7E);
+		padding: 0.25rem 0;
+		opacity: 0.7;
+	}
+
+	/* ---- Sections ---- */
+	.mavi-section-cover .wp-block-cover {
+		min-height: 200px;
+	}
+
+	/* ---- Embeds ---- */
+	.wp-block-embed iframe {
+		min-height: 200px;
+	}
+
+	/* ---- Quote ---- */
+	.mavi-quote {
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 0.75rem;
+	}
+}
+
+/* ==========================================================================
+   RESPONSIVE — SMALL MOBILE (max 480px)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+	/* Réduire encore les spacings */
+	body {
+		font-size: 0.875rem; /* 14px */
+	}
+
+	/* Front-page hero : reduce padding */
+	.mavi-hero {
+		padding-top: 2.5rem !important;
+		padding-bottom: 2rem !important;
+	}
+
+	.mavi-hero::before,
+	.mavi-hero::after {
+		display: none;
+	}
+
+	/* Stat cards : stack */
+	.mavi-stat-card {
+		padding: 1rem !important;
+	}
+
+	/* Callout : encore plus compact */
+	.mavi-callout {
+		padding: 0.625rem;
+		gap: 0.5rem;
+	}
+
+	/* Tags : wrap + espace réduit */
+	.mavi-tag {
+		font-size: 0.75rem;
+	}
+
+	/* Navigation dans le footer — icons seuls */
+	.wp-block-social-links .wp-block-social-link {
+		margin: 0 0.25rem;
+	}
+
+	/* Carousel pagination plus grosse */
+	.mavi-carousel .splide__pagination__page {
+		width: 14px;
+		height: 14px;
+	}
+
+	/* Menu overlay — encore plus de padding pour petits écrans */
+	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item a {
+		padding: 0.875rem 1rem;
+		font-size: 1.125rem;
+	}
+}
+
+/* ==========================================================================
+   RESPONSIVE — LARGE SCREENS (min 1400px)
+   ========================================================================== */
+
+@media (min-width: 1400px) {
+	/* Augmenter les marges latérales sur grand écran */
+	.mavi-section-cover .wp-block-cover__inner-container {
+		max-width: 860px;
+	}
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+	.mavi-header,
+	.mavi-footer,
+	.mavi-copy-btn,
+	.wp-block-navigation,
+	.mavi-carousel .splide__arrow,
+	.mavi-carousel .splide__pagination {
+		display: none !important;
+	}
+
+	body {
+		font-size: 12pt;
+		color: #000;
+		background: #fff;
+	}
+
+	a {
+		color: #000;
+		text-decoration: underline;
+	}
+
+	.wp-block-code {
+		border: 1px solid #ccc;
+		page-break-inside: avoid;
+	}
+
+	img {
+		max-width: 100% !important;
+		page-break-inside: avoid;
+	}
+}

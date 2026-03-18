@@ -1,0 +1,106 @@
+/* ==========================================================================
+   0. CUSTOM PROPERTIES & BASE
+   ========================================================================== */
+
+:root {
+	--mavi-content-padding: clamp(1rem, 4vw, 2rem);
+	--mavi-gap: clamp(0.75rem, 2vw, 1.5rem);
+	--mavi-radius: 6px;
+	/* Brand colors (fallbacks) */
+	--iiaca-navy: #2C3A54;
+	--iiaca-terra: #C1593B;
+	--iiaca-cream: #FAF5EE;
+	--iiaca-sand: #F0E8DC;
+	--iiaca-border: #D9CEBD;
+	--iiaca-muted: #5A6A7E;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Tous les conteneurs ne doivent jamais déborder */
+.wp-block-group,
+.wp-block-columns,
+.wp-block-cover,
+.wp-block-image,
+.wp-block-query,
+.wp-block-post-template,
+main,
+article,
+section {
+	max-width: 100%;
+}
+
+/* Images fluides globales */
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Smooth transitions */
+a,
+button,
+.wp-block-navigation-link {
+	transition: color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+
+/* Tap targets minimum 44px — accessibilité tactile */
+a,
+button,
+input,
+select,
+textarea,
+.wp-block-navigation-link a {
+	min-height: 44px;
+	min-width: 44px;
+}
+
+/* Liens inline dans le texte : pas de min-height contraignant */
+p a,
+li a,
+span a,
+.wp-block-heading a {
+	min-height: unset;
+	min-width: unset;
+}
+
+/* Selection color (terracotta highlight) */
+::selection {
+	background-color: var(--wp--preset--color--terra-bg, #FAEAE3);
+	color: var(--wp--preset--color--primary, #2C3A54);
+}
+
+/* Separator — sable foncé */
+.wp-block-separator {
+	border: none;
+	border-top: 1px solid var(--wp--preset--color--border, #D9CEBD);
+	opacity: 1;
+}
+
+/* Fluid Typography */
+.wp-block-heading,
+h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+	word-break: break-word;
+	hyphens: auto;
+}
+
+.wp-block-post-title {
+	overflow-wrap: break-word;
+	word-break: break-word;
+}

@@ -209,7 +209,7 @@ class Mavi_Admin_Guide {
 		$wp_admin_bar->add_node( array(
 			'id'     => 'mavi-guide',
 			'parent' => 'mavi-theme-menu',
-			'title'  => '💡 Guide MAVI',
+			'title'  => __( '💡 Guide MAVI', 'mavi' ),
 			'href'   => admin_url( 'themes.php?page=mavi-guide' ),
 		) );
 
@@ -240,8 +240,8 @@ class Mavi_Admin_Guide {
 	 */
 	public static function add_guide_page() {
 		add_theme_page(
-			'Guide MAVI',
-			'💡 Guide MAVI',
+			__( 'Guide MAVI', 'mavi' ),
+			__( '💡 Guide MAVI', 'mavi' ),
 			'edit_posts',
 			'mavi-guide',
 			array( __CLASS__, 'render_guide_page' )
