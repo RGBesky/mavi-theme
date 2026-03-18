@@ -246,11 +246,57 @@ class Mavi_Notion_Importer {
 			exit;
 		}
 
-		$results = array();
+		$results  = array();
+		$post_map = array();
+		$parent_map = array();
+
+		// Tri pour importer les parents en premier (chemins plus courts)
+		usort( $html_files, function( $a, $b ) {
+			return substr_count( $a, '/' ) - substr_count( $b, '/' );
+		});
 
 		foreach ( $html_files as $html_file ) {
-			$result = self::import_single_page( $html_file, $tmp_dir, $post_type, $post_status );
+			$dir = dirname( $html_file );
+			$parent_id = 0;
+
+			// Si ce fichier est dans un sous-dossier, chercher l'ID de la page parent (qui porte le même nom que le dossier)
+			$folder_name = basename( $dir );
+			if ( isset( $parent_map[ $folder_name ] ) ) {
+				$parent_id = $parent_map[ $folder_name ];
+			}
+
+			$result = self::import_single_page( $html_file, $tmp_dir, $post_type, $post_status, $parent_id );
 			$results[] = $result;
+
+			if ( $result['status'] === 'success' ) {
+				$filename = basename( $html_file );
+				$post_map[ $filename ] = $result['post_id'];
+
+				// Notion crée un dossier portant le nom du fichier (sans .html) pour les sous-pages
+				$folder_key = pathinfo( $html_file, PATHINFO_FILENAME );
+				$parent_map[ $folder_key ] = $result['post_id'];
+			}
+		}
+
+		// Deuxième passe : réécriture des liens internes
+		foreach ( $post_map as $filename => $post_id ) {
+			$post = get_post( $post_id );
+			if ( $post ) {
+				$content = preg_replace_callback( '/href="([^"]+\.html)"/i', function( $matches ) use ( $post_map ) {
+					$link = urldecode( basename( $matches[1] ) );
+					if ( isset( $post_map[ $link ] ) ) {
+						return 'href="' . esc_url( get_permalink( $post_map[ $link ] ) ) . '"';
+					}
+					return $matches[0];
+				}, $post->post_content );
+
+				if ( $content !== $post->post_content ) {
+					wp_update_post( array(
+						'ID'           => $post_id,
+						'post_content' => $content,
+					) );
+				}
+			}
 		}
 
 		// Nettoyage
@@ -282,7 +328,7 @@ class Mavi_Notion_Importer {
 	/**
 	 * Importe une seule page Notion.
 	 */
-	private static function import_single_page( $html_path, $base_dir, $post_type, $post_status ) {
+	private static function import_single_page( $html_path, $base_dir, $post_type, $post_status, $parent_id = 0 ) {
 		$html_content = file_get_contents( $html_path );
 
 		if ( ! $html_content ) {
@@ -317,7 +363,59 @@ class Mavi_Notion_Importer {
 		}
 
 		$image_count = 0;
-		$block_content = self::convert_node_to_blocks( $body, $images_dir, $image_count );
+
+		// Traitement de l'en-tête (Cover & Emoji)
+		$header_blocks = '';
+		$header = $doc->getElementsByTagName( 'header' )->item( 0 );
+		if ( $header ) {
+			$icon = '';
+			$cover_url = '';
+
+			// Chercher l'icône
+			$icon_nodes = $header->getElementsByTagName( 'span' );
+			foreach ( $icon_nodes as $icon_node ) {
+				if ( strpos( $icon_node->getAttribute( 'class' ), 'icon' ) !== false ) {
+					$icon = trim( $icon_node->textContent );
+					break;
+				}
+			}
+
+			// Chercher la cover
+			$cover_nodes = $header->getElementsByTagName( 'img' );
+			foreach ( $cover_nodes as $cover_node ) {
+				if ( strpos( $cover_node->getAttribute( 'class' ), 'page-cover' ) !== false ) {
+					$src = $cover_node->getAttribute( 'src' );
+					$wp_url = self::upload_notion_image( $src, $images_dir );
+					if ( $wp_url ) {
+						$cover_url = $wp_url;
+						$image_count++;
+					}
+					break;
+				}
+			}
+
+			if ( $cover_url || $icon ) {
+				// Générer un bloc de couverture ou un groupe contenant l'icône
+				if ( $cover_url ) {
+					$header_blocks .= '<!-- wp:cover {"url":"' . esc_url( $cover_url ) . '","dimRatio":10,"overlayColor":"base","isUserOverlayColor":true,"layout":{"type":"constrained"}} -->' . "\n";
+					$header_blocks .= '<div class="wp-block-cover"><span aria-hidden="true" class="wp-block-cover__background has-base-background-color has-background-dim-10 has-background-dim"></span><img class="wp-block-cover__image-background" alt="" src="' . esc_url( $cover_url ) . '" data-object-fit="cover"/>';
+					$header_blocks .= '<div class="wp-block-cover__inner-container">';
+					if ( $icon ) {
+						$header_blocks .= '<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"6rem"}}} -->' . "\n";
+						$header_blocks .= '<p class="has-text-align-center" style="font-size:6rem">' . $icon . '</p>' . "\n";
+						$header_blocks .= '<!-- /wp:paragraph -->' . "\n";
+					}
+					$header_blocks .= '</div></div>' . "\n";
+					$header_blocks .= '<!-- /wp:cover -->' . "\n\n";
+				} else if ( $icon ) {
+					$header_blocks .= '<!-- wp:paragraph {"style":{"typography":{"fontSize":"4rem"}}} -->' . "\n";
+					$header_blocks .= '<p style="font-size:4rem">' . $icon . '</p>' . "\n";
+					$header_blocks .= '<!-- /wp:paragraph -->' . "\n\n";
+				}
+			}
+		}
+
+		$block_content = $header_blocks . self::convert_node_to_blocks( $body, $images_dir, $image_count );
 
 		// Créer le post WordPress
 		$post_id = wp_insert_post( array(
@@ -325,6 +423,7 @@ class Mavi_Notion_Importer {
 			'post_content' => $block_content,
 			'post_type'    => $post_type,
 			'post_status'  => $post_status,
+			'post_parent'  => $parent_id,
 		) );
 
 		if ( is_wp_error( $post_id ) ) {
@@ -485,7 +584,7 @@ class Mavi_Notion_Importer {
 				case $tag === 'p':
 					$text = self::get_inner_html( $child );
 					if ( ! empty( trim( strip_tags( $text ) ) ) ) {
-						$blocks .= self::make_paragraph( $text );
+						$blocks .= self::make_paragraph( $text, $class );
 					}
 					break;
 
@@ -503,9 +602,18 @@ class Mavi_Notion_Importer {
 				case $tag === 'a':
 					$href = $child->getAttribute( 'href' );
 					$text = trim( $child->textContent );
-					if ( ! empty( $text ) && ! empty( $href ) ) {
+
+					// Vérifier s'il s'agit d'un signet / bookmark
+					if ( strpos( $class, 'bookmark' ) !== false ) {
+						$blocks .= self::make_bookmark( $child );
+					} elseif ( ! empty( $text ) && ! empty( $href ) ) {
 						$blocks .= self::make_paragraph( '<a href="' . esc_url( $href ) . '">' . esc_html( $text ) . '</a>' );
 					}
+					break;
+
+				// Bookmark (dans <figure class="link-to-page"> ou <figure class="bookmark">)
+				case $tag === 'figure' && ( strpos( $class, 'bookmark' ) !== false || strpos( $class, 'link-to-page' ) !== false ):
+					$blocks .= self::make_bookmark( $child );
 					break;
 
 				default:
@@ -539,17 +647,72 @@ class Mavi_Notion_Importer {
 		);
 	}
 
-	private static function make_paragraph( $content ) {
+	private static function make_paragraph( $content, $class = '' ) {
 		$content = trim( $content );
 		if ( empty( strip_tags( $content ) ) ) {
 			return '';
 		}
 
+		// Traitement des couleurs (ex: color-red, block-color-yellow_background)
+		$block_attrs = array();
+		$classes = array();
+		$styles = array();
+		$wrapper_style = '';
+		$wrapper_class = '';
+
+		// Couleurs de texte Notion -> Palette WP
+		$color_map = array(
+			'color-gray'   => 'notion-gray',
+			'color-brown'  => 'notion-brown',
+			'color-orange' => 'notion-orange',
+			'color-yellow' => 'notion-yellow',
+			'color-green'  => 'notion-green',
+			'color-blue'   => 'notion-blue',
+			'color-purple' => 'notion-purple',
+			'color-pink'   => 'notion-pink',
+			'color-red'    => 'notion-red',
+		);
+
+		// Couleurs de fond Notion -> Palette WP
+		$bg_color_map = array(
+			'block-color-gray_background'   => 'notion-gray-bg',
+			'block-color-brown_background'  => 'notion-brown-bg',
+			'block-color-orange_background' => 'notion-orange-bg',
+			'block-color-yellow_background' => 'notion-yellow-bg',
+			'block-color-green_background'  => 'notion-green-bg',
+			'block-color-blue_background'   => 'notion-blue-bg',
+			'block-color-purple_background' => 'notion-purple-bg',
+			'block-color-pink_background'   => 'notion-pink-bg',
+			'block-color-red_background'    => 'notion-red-bg',
+		);
+
+		if ( ! empty( $class ) ) {
+			foreach ( $color_map as $notion_class => $wp_color ) {
+				if ( strpos( $class, $notion_class ) !== false ) {
+					$block_attrs['textColor'] = $wp_color;
+					$classes[] = 'has-' . $wp_color . '-color';
+					$classes[] = 'has-text-color';
+				}
+			}
+			foreach ( $bg_color_map as $notion_class => $wp_color ) {
+				if ( strpos( $class, $notion_class ) !== false ) {
+					$block_attrs['backgroundColor'] = $wp_color;
+					$classes[] = 'has-' . $wp_color . '-background-color';
+					$classes[] = 'has-background';
+				}
+			}
+		}
+
+		$attrs_str = empty( $block_attrs ) ? '' : ' ' . wp_json_encode( $block_attrs );
+		if ( ! empty( $classes ) ) {
+			$wrapper_class = ' class="' . implode( ' ', $classes ) . '"';
+		}
+
 		return sprintf(
-			'<!-- wp:paragraph -->' . "\n" .
-			'<p>%s</p>' . "\n" .
+			'<!-- wp:paragraph%s -->' . "\n" .
+			'<p%s>%s</p>' . "\n" .
 			'<!-- /wp:paragraph -->' . "\n\n",
-			$content
+			$attrs_str, $wrapper_class, $content
 		);
 	}
 
@@ -820,8 +983,8 @@ class Mavi_Notion_Importer {
 		}
 
 		return sprintf(
-			'<!-- wp:list -->' . "\n" .
-			'<ul>%s</ul>' . "\n" .
+			'<!-- wp:list {"className":"is-style-mavi-coche"} -->' . "\n" .
+			'<ul class="is-style-mavi-coche">%s</ul>' . "\n" .
 			'<!-- /wp:list -->' . "\n\n",
 			$items
 		);
@@ -870,6 +1033,54 @@ class Mavi_Notion_Importer {
 		return '<!-- wp:separator -->' . "\n" .
 		       '<hr class="wp-block-separator has-alpha-channel-opacity" />' . "\n" .
 		       '<!-- /wp:separator -->' . "\n\n";
+	}
+
+	private static function make_bookmark( $node ) {
+		$href = '';
+		$title = '';
+		$desc = '';
+
+		if ( strtolower( $node->tagName ) === 'a' ) {
+			$href = $node->getAttribute( 'href' );
+			$title = trim( $node->textContent );
+		} else {
+			// C'est un <figure>
+			$a = $node->getElementsByTagName( 'a' )->item( 0 );
+			if ( $a ) {
+				$href = $a->getAttribute( 'href' );
+				// Tenter d'extraire des infos (Notion exporte parfois des div internes dans la figure)
+				$divs = $node->getElementsByTagName( 'div' );
+				foreach ( $divs as $div ) {
+					$c = $div->getAttribute( 'class' );
+					if ( strpos( $c, 'title' ) !== false || strpos( $c, 'name' ) !== false ) {
+						$title = trim( $div->textContent );
+					} elseif ( strpos( $c, 'description' ) !== false ) {
+						$desc = trim( $div->textContent );
+					}
+				}
+				if ( ! $title ) {
+					$title = trim( $node->textContent ); // fallback
+				}
+			}
+		}
+
+		if ( empty( $href ) ) {
+			return '';
+		}
+
+		if ( empty( $title ) ) {
+			$title = $href;
+		}
+
+		// On convertit le bookmark Notion en un bloc d'intégration générique (Embed) ou un bloc de lien personnalisé
+		return sprintf(
+			'<!-- wp:embed {"url":"%s","type":"rich","providerNameSlug":"embed-handler"} -->' . "\n" .
+			'<figure class="wp-block-embed is-type-rich is-provider-embed-handler"><div class="wp-block-embed__wrapper">' . "\n" .
+			'%s' . "\n" .
+			'</div></figure>' . "\n" .
+			'<!-- /wp:embed -->' . "\n\n",
+			esc_url( $href ), esc_url( $href )
+		);
 	}
 
 	/**
@@ -931,17 +1142,81 @@ class Mavi_Notion_Importer {
 	}
 
 	private static function make_table( $node ) {
-		$doc = $node->ownerDocument;
-		$html = $doc->saveHTML( $node );
+		$tbody_html = '';
+		$thead_html = '';
+		$has_head = false;
 
-		// Nettoyer les attributs Notion et garder la table brute
-		$html = preg_replace( '/\s(class|style|id|data-[a-z-]+)="[^"]*"/i', '', $html );
+		$tbody_node = $node->getElementsByTagName( 'tbody' )->item( 0 );
+		$thead_node = $node->getElementsByTagName( 'thead' )->item( 0 );
+
+		$rows_container = $tbody_node ? $tbody_node->childNodes : $node->childNodes;
+
+		if ( $thead_node ) {
+			$has_head = true;
+			$thead_html .= "<thead>\n";
+			foreach ( $thead_node->childNodes as $tr ) {
+				if ( $tr->nodeType !== XML_ELEMENT_NODE || strtolower( $tr->tagName ) !== 'tr' ) continue;
+				$thead_html .= "<tr>\n";
+				foreach ( $tr->childNodes as $th ) {
+					if ( $th->nodeType !== XML_ELEMENT_NODE ) continue;
+					$thead_html .= '<th>' . self::get_inline_content( $th ) . "</th>\n";
+				}
+				$thead_html .= "</tr>\n";
+			}
+			$thead_html .= "</thead>\n";
+		}
+
+		$tbody_html .= "<tbody>\n";
+		$first_row = true;
+		foreach ( $rows_container as $tr ) {
+			if ( $tr->nodeType !== XML_ELEMENT_NODE || strtolower( $tr->tagName ) !== 'tr' ) continue;
+
+			// Détection manuelle de l'en-tête (souvent Notion exporte juste un thead natif ou parfois th dans la première ligne tbody)
+			$is_head_row = false;
+			if ( ! $has_head && $first_row ) {
+				$first_cell = $tr->childNodes->item( 0 );
+				while ( $first_cell && $first_cell->nodeType !== XML_ELEMENT_NODE ) {
+					$first_cell = $first_cell->nextSibling;
+				}
+				if ( $first_cell && strtolower( $first_cell->tagName ) === 'th' ) {
+					$is_head_row = true;
+					$has_head = true;
+				}
+			}
+
+			if ( $is_head_row ) {
+				$thead_html .= "<thead>\n<tr>\n";
+				foreach ( $tr->childNodes as $th ) {
+					if ( $th->nodeType !== XML_ELEMENT_NODE ) continue;
+					$thead_html .= '<th>' . self::get_inline_content( $th ) . "</th>\n";
+				}
+				$thead_html .= "</tr>\n</thead>\n";
+			} else {
+				$tbody_html .= "<tr>\n";
+				foreach ( $tr->childNodes as $td ) {
+					if ( $td->nodeType !== XML_ELEMENT_NODE ) continue;
+					$tag = strtolower( $td->tagName );
+					if ( $tag !== 'td' && $tag !== 'th' ) continue;
+					$tbody_html .= '<td>' . self::get_inline_content( $td ) . "</td>\n";
+				}
+				$tbody_html .= "</tr>\n";
+			}
+			$first_row = false;
+		}
+		$tbody_html .= "</tbody>\n";
+
+		$table_attrs = array();
+		if ( $has_head ) {
+			$table_attrs['hasWindowTable'] = true; // Hack: juste pour forcer l'attr
+		}
 
 		return sprintf(
-			'<!-- wp:table -->' . "\n" .
-			'<figure class="wp-block-table">%s</figure>' . "\n" .
+			'<!-- wp:table %s -->' . "\n" .
+			'<figure class="wp-block-table"><table>%s%s</table></figure>' . "\n" .
 			'<!-- /wp:table -->' . "\n\n",
-			$html
+			empty( $table_attrs ) ? '' : wp_json_encode( $table_attrs ),
+			$thead_html,
+			$tbody_html
 		);
 	}
 
