@@ -41,8 +41,8 @@ class Mavi_Notion_Importer {
 	 */
 	public static function add_admin_page() {
 		add_management_page(
-			'Import Notion',
-			'Import Notion',
+			__( 'Import Notion', 'mavi' ),
+			__( 'Import Notion', 'mavi' ),
 			'manage_options',
 			'mavi-notion-import',
 			array( __CLASS__, 'render_admin_page' )
@@ -192,13 +192,27 @@ class Mavi_Notion_Importer {
 		}
 
 		$post_type   = sanitize_text_field( $_POST['post_type'] ?? 'page' );
+		if ( ! in_array( $post_type, array( 'post', 'page' ), true ) ) {
+			$post_type = 'page';
+		}
+
 		$post_status = sanitize_text_field( $_POST['post_status'] ?? 'draft' );
+		if ( ! in_array( $post_status, array( 'draft', 'publish' ), true ) ) {
+			$post_status = 'draft';
+		}
 
 		// Extraire le ZIP
 		$upload_dir = wp_upload_dir();
 		$tmp_dir    = $upload_dir['basedir'] . '/mavi-notion-import-' . wp_generate_uuid4();
 
-		WP_Filesystem();
+		if ( ! WP_Filesystem() ) {
+			set_transient( 'mavi_import_results', array( array(
+				'status'  => 'error',
+				'message' => __( 'Erreur d\'initialisation du système de fichiers WordPress.', 'mavi' ),
+			) ), 60 );
+			wp_redirect( admin_url( 'tools.php?page=mavi-notion-import' ) );
+			exit;
+		}
 		$unzip_result = unzip_file( $_FILES['notion_zip']['tmp_name'], $tmp_dir );
 
 		if ( is_wp_error( $unzip_result ) ) {

@@ -1,0 +1,722 @@
+/* ==========================================================================
+   CALLOUTS
+   ========================================================================== */
+
+.mavi-callout {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+	line-height: 1.6;
+	padding: var(--mavi-content-padding);
+}
+
+.mavi-callout .mavi-callout__icon {
+	font-size: clamp(1.1rem, 3vw, 1.35rem);
+	flex-shrink: 0;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.mavi-callout .mavi-callout__content {
+	flex: 1;
+	min-width: 0;
+	overflow-wrap: break-word;
+}
+
+.mavi-callout .mavi-callout__content p {
+	margin: 0;
+}
+
+/* ==========================================================================
+   COVER + ICON (Page header)
+   ========================================================================== */
+
+.mavi-cover-icon {
+	position: relative;
+	margin-bottom: var(--wp--preset--spacing--40, 1.5rem);
+}
+
+.mavi-cover-icon__image .wp-block-cover {
+	border-radius: 0;
+	min-height: clamp(150px, 30vw, 300px);
+}
+
+.mavi-cover-icon__emoji-wrapper {
+	position: relative;
+	z-index: 1;
+}
+
+.mavi-cover-icon__emoji {
+	margin: 0;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+	font-size: clamp(3rem, 8vw, 5rem);
+}
+
+/* ==========================================================================
+   TIMELINE
+   ========================================================================== */
+
+.mavi-timeline {
+	position: relative;
+}
+
+/* Ligne verticale */
+.mavi-timeline::before {
+	content: "";
+	position: absolute;
+	left: 24px;
+	top: 80px;
+	bottom: 40px;
+	width: 2px;
+	background-color: var(--wp--preset--color--surface, #F0E8DC);
+}
+
+.mavi-timeline__item {
+	position: relative;
+}
+
+.mavi-timeline__marker {
+	flex-shrink: 0;
+	width: 48px;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	z-index: 1;
+}
+
+.mavi-timeline__icon {
+	background: var(--wp--preset--color--background, #FFFFFF);
+	margin: 0;
+}
+
+.mavi-timeline__content {
+	flex: 1;
+	min-width: 0;
+	padding-bottom: var(--wp--preset--spacing--20, 0.5rem);
+	overflow-wrap: break-word;
+}
+
+.mavi-timeline__content h3 {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+}
+
+.mavi-timeline__content p {
+	margin-top: 0;
+}
+
+/* ==========================================================================
+   PROJECT CARD (Portfolio)
+   ========================================================================== */
+
+.mavi-project-card {
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+	overflow: hidden;
+}
+
+.mavi-project-card:hover {
+	box-shadow: 0 4px 12px rgba(44, 58, 84, 0.08);
+	transform: translateY(-2px);
+}
+
+/* Désactiver hover transform sur devices tactiles (évite le « stuck hover ») */
+@media (hover: none) {
+	.mavi-project-card:hover {
+		transform: none;
+	}
+}
+
+.mavi-project-card img {
+	width: 100%;
+	height: clamp(140px, 25vw, 220px);
+	object-fit: cover;
+}
+
+/* Tags (technologies) */
+.mavi-tag {
+	display: inline-block;
+	margin: 0;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+/* ==========================================================================
+   TABLE DES MATIÈRES
+   ========================================================================== */
+
+.mavi-toc {
+	font-size: var(--wp--preset--font-size--small, 0.875rem);
+}
+
+.mavi-toc__list ul {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+.mavi-toc__list ul li {
+	padding: 0.25rem 0;
+}
+
+.mavi-toc__list ul li a {
+	color: var(--wp--preset--color--secondary, #5A6A7E);
+	text-decoration: none;
+	transition: color 0.15s ease;
+	padding: 0.25rem 0;
+	display: inline-block;
+}
+
+.mavi-toc__list ul li a:hover {
+	color: var(--wp--preset--color--primary, #2C3A54);
+}
+
+/* Indentation pour sous-niveaux */
+.mavi-toc__list ul li.toc-h3 {
+	padding-left: 1rem;
+}
+
+.mavi-toc__list ul li.toc-h4 {
+	padding-left: 2rem;
+}
+
+/* ==========================================================================
+   CARROUSEL (Splide.js)
+   ========================================================================== */
+
+.mavi-carousel {
+	max-width: 100%;
+	overflow: hidden;
+}
+
+.mavi-carousel .splide__slide {
+	padding: 0 0.5rem;
+}
+
+.mavi-carousel .splide__slide img {
+	border-radius: var(--mavi-radius);
+	width: 100%;
+	height: auto;
+}
+
+/* Flèches de navigation */
+.mavi-carousel .splide__arrow {
+	background: var(--wp--preset--color--white, #FFFFFF);
+	box-shadow: 0 2px 8px rgba(44, 58, 84, 0.12);
+	opacity: 0.9;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.mavi-carousel .splide__arrow:hover {
+	opacity: 1;
+	box-shadow: 0 4px 12px rgba(44, 58, 84, 0.18);
+}
+
+/* Pagination dots — taille touch-friendly */
+.mavi-carousel .splide__pagination__page {
+	background: var(--wp--preset--color--surface, #F0E8DC);
+	width: 10px;
+	height: 10px;
+}
+
+.mavi-carousel .splide__pagination__page.is-active {
+	background: var(--wp--preset--color--accent, #C1593B);
+}
+
+/* ==========================================================================
+   CARROUSEL CONTENU (cartes swipables)
+   ========================================================================== */
+
+.mavi-content-carousel {
+	max-width: 100%;
+	overflow: hidden;
+	padding-bottom: 1rem;
+}
+
+/*
+ * Aperçu éditeur : les cartes sont affichées côte à côte
+ * dans un conteneur flex wrap. Le carrousel Splide ne
+ * s'active que côté front-end via le filtre PHP.
+ */
+.mavi-content-carousel .mavi-slide-card {
+	width: 350px;
+	min-width: 280px;
+	flex-shrink: 0;
+}
+
+/*
+ * Reset des classes de layout WordPress (is-layout-*)
+ * qui entrent en conflit avec le CSS de Splide.js.
+ */
+.mavi-content-carousel.splide {
+	overflow: visible;
+}
+
+.mavi-content-carousel .splide__track {
+	overflow: hidden !important;
+	display: block !important;
+	max-width: none !important;
+	padding: 0 !important;
+}
+
+.mavi-content-carousel .splide__list {
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	gap: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	max-width: none !important;
+}
+
+.mavi-content-carousel .splide__slide {
+	flex-shrink: 0 !important;
+	float: none !important;
+	margin: 0 !important;
+	max-width: none !important;
+}
+
+/* Chaque carte du carrousel contenu */
+.mavi-content-carousel .splide__slide {
+	padding: 0.5rem;
+}
+
+.mavi-content-carousel .mavi-slide-card {
+	background: var(--wp--preset--color--white, #FFFFFF);
+	border-radius: 12px;
+	padding: clamp(1.25rem, 3vw, 2rem);
+	box-shadow: 0 2px 8px rgba(44, 58, 84, 0.08), 0 1px 3px rgba(44, 58, 84, 0.04);
+	border: 1px solid var(--wp--preset--color--border, #D9CEBD);
+	height: 100%;
+	min-height: 220px;
+	display: flex;
+	flex-direction: column;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.mavi-content-carousel .mavi-slide-card:hover {
+	box-shadow: 0 6px 20px rgba(44, 58, 84, 0.12), 0 2px 6px rgba(44, 58, 84, 0.06);
+	transform: translateY(-2px);
+}
+
+@media (hover: none) {
+	.mavi-content-carousel .mavi-slide-card:hover {
+		transform: none;
+	}
+}
+
+/* Icône / emoji en haut de la carte */
+.mavi-slide-card__icon {
+	font-size: 2.5rem;
+	line-height: 1;
+	margin-bottom: 0.75rem;
+}
+
+/* Barre d'accent colorée en haut */
+.mavi-content-carousel .mavi-slide-card--accent {
+	border-top: 3px solid var(--wp--preset--color--accent, #C1593B);
+}
+
+.mavi-content-carousel .mavi-slide-card--navy {
+	border-top: 3px solid var(--wp--preset--color--primary, #2C3A54);
+}
+
+/* Progress counter (1/5 etc) */
+.mavi-content-carousel .splide__pagination {
+	padding-top: 1rem;
+}
+
+/* ==========================================================================
+   QUOTE IIACA
+   ========================================================================== */
+
+.mavi-quote {
+	padding-left: var(--wp--preset--spacing--30, 1rem);
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.mavi-quote p {
+	font-style: italic;
+}
+
+.mavi-quote cite {
+	font-style: normal;
+	font-size: var(--wp--preset--font-size--small, 0.875rem);
+	color: var(--wp--preset--color--secondary, #5A6A7E);
+}
+
+/* ==========================================================================
+   CODE BLOCK ENHANCED
+   ========================================================================== */
+
+.wp-block-code {
+	position: relative;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+}
+
+.wp-block-code code {
+	white-space: pre;
+	word-break: normal;
+	overflow-wrap: normal;
+}
+
+.mavi-copy-btn {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: rgba(255, 255, 255, 0.8);
+	border: 1px solid var(--wp--preset--color--border, #D9CEBD);
+	border-radius: var(--mavi-radius);
+	padding: 6px 12px;
+	font-size: 0.75rem;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+	color: var(--wp--preset--color--secondary, #5A6A7E);
+	font-family: var(--wp--preset--font-family--body);
+	z-index: 2;
+}
+
+.wp-block-code:hover .mavi-copy-btn,
+.wp-block-code:focus-within .mavi-copy-btn {
+	opacity: 1;
+}
+
+.mavi-copy-btn:hover {
+	background: var(--wp--preset--color--background, #FFFFFF);
+	color: var(--wp--preset--color--primary, #2C3A54);
+}
+
+/* ==========================================================================
+   SCROLL HORIZONTAL (tableaux & contenus larges)
+   ========================================================================== */
+
+.mavi-scroll-container {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+}
+
+.mavi-scroll-container::-webkit-scrollbar,
+.wp-block-table::-webkit-scrollbar {
+	height: 6px;
+}
+
+.mavi-scroll-container::-webkit-scrollbar-thumb,
+.wp-block-table::-webkit-scrollbar-thumb {
+	background-color: rgba(44, 58, 84, 0.16);
+	border-radius: 3px;
+}
+
+.mavi-scroll-container::-webkit-scrollbar-track,
+.wp-block-table::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.wp-block-table {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	max-width: 100%;
+}
+
+.wp-block-table table {
+	min-width: 500px;
+}
+
+/* ==========================================================================
+   SECTIONS
+   ========================================================================== */
+
+.mavi-section {
+	position: relative;
+}
+
+.mavi-section-cover .wp-block-cover__inner-container {
+	max-width: 720px;
+	margin: 0 auto;
+	padding: var(--mavi-content-padding);
+}
+
+/* ==========================================================================
+   COLUMNS (WordPress)
+   ========================================================================== */
+
+.wp-block-columns {
+	gap: var(--mavi-gap);
+}
+
+/* ==========================================================================
+   POST NAVIGATION (prev/next)
+   ========================================================================== */
+
+.mavi-post-nav {
+	flex-wrap: wrap !important;
+	gap: var(--mavi-gap);
+}
+
+/* ==========================================================================
+   FRONT-PAGE — Hero & Sections
+   ========================================================================== */
+
+/* Hero section */
+.mavi-hero {
+	position: relative;
+	overflow: hidden;
+	padding: clamp(4rem, 10vw, 7rem) var(--mavi-content-padding) clamp(3rem, 8vw, 5rem);
+}
+
+.mavi-hero__subtitle {
+	font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+	line-height: 1.7;
+}
+
+.mavi-hero__title {
+	font-size: clamp(2rem, 1.5rem + 2.5vw, 3.25rem) !important;
+	line-height: 1.15;
+}
+
+/* Sections — padding responsive */
+.mavi-section-about,
+.mavi-section-latest {
+	padding: clamp(3rem, 6vw, 5rem) var(--mavi-content-padding);
+}
+
+.mavi-hero::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	right: -20%;
+	width: 500px;
+	height: 500px;
+	background: radial-gradient(circle, rgba(193, 89, 59, 0.12) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+.mavi-hero::after {
+	content: '';
+	position: absolute;
+	bottom: -30%;
+	left: -15%;
+	width: 400px;
+	height: 400px;
+	background: radial-gradient(circle, rgba(61, 79, 110, 0.15) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+.mavi-hero__title {
+	position: relative;
+	z-index: 1;
+}
+
+/* Buttons */
+.mavi-btn-primary .wp-block-button__link {
+	transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+	box-shadow: 0 2px 8px rgba(193, 89, 59, 0.3);
+}
+
+.mavi-btn-primary .wp-block-button__link:hover {
+	background-color: #A84B30 !important;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 16px rgba(193, 89, 59, 0.4);
+}
+
+/* Outline button on dark backgrounds */
+.mavi-hero .is-style-outline .wp-block-button__link {
+	border: 1.5px solid rgba(255, 255, 255, 0.4);
+	transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.mavi-hero .is-style-outline .wp-block-button__link:hover {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+	border-color: #FFFFFF !important;
+	transform: translateY(-1px);
+}
+
+/* Cards */
+.mavi-card {
+	box-shadow: 0 1px 3px rgba(44, 58, 84, 0.06), 0 1px 2px rgba(44, 58, 84, 0.04);
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.mavi-card:hover {
+	box-shadow: 0 4px 12px rgba(44, 58, 84, 0.1), 0 2px 4px rgba(44, 58, 84, 0.06);
+	transform: translateY(-2px);
+}
+
+@media (hover: none) {
+	.mavi-card:hover {
+		transform: none;
+	}
+}
+
+/* Post cards */
+.mavi-post-card {
+	border: 1px solid var(--wp--preset--color--border, #D9CEBD);
+}
+
+.mavi-post-card .wp-block-post-title a {
+	text-decoration: none;
+	color: var(--wp--preset--color--primary, #2C3A54);
+}
+
+.mavi-post-card .wp-block-post-title a:hover {
+	color: var(--wp--preset--color--accent, #C1593B);
+}
+
+/* Stat cards — slight accent bar */
+.mavi-stat-card {
+	border-top: 3px solid var(--wp--preset--color--accent, #C1593B);
+}
+
+/* About section */
+.mavi-section-about {
+	position: relative;
+}
+
+/* Latest posts section */
+.mavi-section-latest {
+	position: relative;
+}
+
+/* ==========================================================================
+   DETAILS / TOGGLE
+   ========================================================================== */
+
+.wp-block-details {
+	max-width: 100%;
+	overflow-wrap: break-word;
+}
+
+.wp-block-details summary {
+	cursor: pointer;
+	padding: 0.5rem 0;
+	font-weight: 600;
+}
+
+/* ==========================================================================
+   EMBEDS & IFRAMES
+   ========================================================================== */
+
+.wp-block-embed {
+	max-width: 100%;
+	overflow: hidden;
+}
+
+.wp-block-embed iframe {
+	max-width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+}
+
+/* ==========================================================================
+   PAGE TEMPLATES — Variantes
+   ========================================================================== */
+
+/* --- Page avec bandeau (cover) --- */
+.mavi-page-cover__banner {
+	margin-bottom: 0;
+}
+
+.mavi-page-cover__image {
+	border-radius: 0;
+}
+
+.mavi-page-cover__image .wp-block-cover__inner-container {
+	max-width: 720px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.mavi-page-cover__title {
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Page sans bandeau (blank) --- */
+.mavi-page-blank {
+	min-height: 60vh;
+}
+
+/* --- Page sans en-tête --- */
+.mavi-page-noheader {
+	min-height: 80vh;
+}
+
+/* ==========================================================================
+   STYLES DE LISTES PERSONNALISÉES
+   ========================================================================== */
+
+/* — Carré ■ */
+.wp-block-list.is-style-mavi-carre {
+	list-style-type: square;
+}
+
+/* — Flèche → */
+.wp-block-list.is-style-mavi-fleche {
+	list-style: none;
+	padding-left: 1.6em;
+}
+.wp-block-list.is-style-mavi-fleche > li {
+	position: relative;
+}
+.wp-block-list.is-style-mavi-fleche > li::before {
+	content: "→";
+	color: var(--wp--preset--color--accent, #C1593B);
+	font-weight: 600;
+	position: absolute;
+	left: -1.6em;
+	width: 1.4em;
+	text-align: left;
+}
+
+/* — Tiret — */
+.wp-block-list.is-style-mavi-tiret {
+	list-style: none;
+	padding-left: 1.6em;
+}
+.wp-block-list.is-style-mavi-tiret > li {
+	position: relative;
+}
+.wp-block-list.is-style-mavi-tiret > li::before {
+	content: "—";
+	color: var(--wp--preset--color--primary, #2C3A54);
+	position: absolute;
+	left: -1.6em;
+	width: 1.4em;
+	text-align: left;
+}
+
+/* — Coche ✓ */
+.wp-block-list.is-style-mavi-coche {
+	list-style: none;
+	padding-left: 1.6em;
+}
+.wp-block-list.is-style-mavi-coche > li {
+	position: relative;
+}
+.wp-block-list.is-style-mavi-coche > li::before {
+	content: "✓";
+	color: #448361;
+	font-weight: 700;
+	position: absolute;
+	left: -1.6em;
+	width: 1.4em;
+	text-align: left;
+}
+
+/* — Point terracotta */
+.wp-block-list.is-style-mavi-accent {
+	list-style: disc;
+}
+.wp-block-list.is-style-mavi-accent > li::marker {
+	color: var(--wp--preset--color--accent, #C1593B);
+	font-size: 1.1em;
+}
+
+/* — Sans puce */
+.wp-block-list.is-style-mavi-sans {
+	list-style: none;
+	padding-left: 0;
+}
