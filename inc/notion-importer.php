@@ -687,8 +687,10 @@ class Mavi_Notion_Importer {
 		);
 
 		if ( ! empty( $class ) ) {
+			// Sort to match specific classes first (e.g. color-red before color-red_background)
 			foreach ( $color_map as $notion_class => $wp_color ) {
-				if ( strpos( $class, $notion_class ) !== false ) {
+				// Ensure we match the exact text color class, not a substring of a background color
+				if ( preg_match( '/\b' . preg_quote($notion_class, '/') . '\b(?![_-])/', $class ) ) {
 					$block_attrs['textColor'] = $wp_color;
 					$classes[] = 'has-' . $wp_color . '-color';
 					$classes[] = 'has-text-color';
@@ -969,7 +971,7 @@ class Mavi_Notion_Importer {
 			}
 
 			$checkbox = $li->getElementsByTagName( 'input' )->item( 0 );
-			$checked = $checkbox && $checkbox->getAttribute( 'checked' ) !== null;
+			$checked = $checkbox && $checkbox->hasAttribute( 'checked' );
 			$text = trim( $li->textContent );
 
 			$prefix = $checked ? '☑️ ' : '☐ ';
