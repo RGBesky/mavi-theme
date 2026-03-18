@@ -201,6 +201,21 @@ class Mavi_Notion_Importer {
 			$post_status = 'draft';
 		}
 
+		// Valider que le fichier uploadé est bien un ZIP (F-001 — MIME check)
+		$tmp_file = $_FILES['notion_zip']['tmp_name'];
+		$finfo    = finfo_open( FILEINFO_MIME_TYPE );
+		$mime     = finfo_file( $finfo, $tmp_file );
+		finfo_close( $finfo );
+		$allowed_mimes = array( 'application/zip', 'application/x-zip-compressed', 'application/x-zip', 'application/octet-stream' );
+		if ( ! in_array( $mime, $allowed_mimes, true ) ) {
+			set_transient( 'mavi_import_results', array( array(
+				'status'  => 'error',
+				'message' => __( 'Le fichier uploadé n\'est pas un fichier ZIP valide.', 'mavi' ),
+			) ), 60 );
+			wp_redirect( admin_url( 'tools.php?page=mavi-notion-import' ) );
+			exit;
+		}
+
 		// Extraire le ZIP
 		$upload_dir = wp_upload_dir();
 		$tmp_dir    = $upload_dir['basedir'] . '/mavi-notion-import-' . wp_generate_uuid4();
@@ -213,7 +228,7 @@ class Mavi_Notion_Importer {
 			wp_redirect( admin_url( 'tools.php?page=mavi-notion-import' ) );
 			exit;
 		}
-		$unzip_result = unzip_file( $_FILES['notion_zip']['tmp_name'], $tmp_dir );
+		$unzip_result = unzip_file( $tmp_file, $tmp_dir );
 
 		if ( is_wp_error( $unzip_result ) ) {
 			set_transient( 'mavi_import_results', array( array(
